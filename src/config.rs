@@ -61,6 +61,7 @@ pub struct Config {
     pub labels_capitalize: bool,
     pub custom_lines: Vec<String>,
     pub color_mode: String,
+    #[allow(dead_code)]
     pub order: Vec<String>,
     pub font: String,
     pub variables: HashMap<String, String>,
@@ -69,6 +70,8 @@ pub struct Config {
     pub underline: bool,
     pub glow: bool,
     pub style: String,
+    #[allow(dead_code)]
+    pub palettes: HashMap<String, Vec<String>>,
 }
 
 impl Default for Config {
@@ -131,6 +134,7 @@ impl Default for Config {
             underline: false,
             glow: false,
             style: "full".into(),
+            palettes: HashMap::new(),
         }
     }
 }
@@ -139,33 +143,46 @@ pub fn load() -> Config {
     let args: Vec<String> = env::args().skip(1).collect();
     let mut cfg = Config::default();
 
-    let mut config_path: Option<PathBuf> = None;
+    let mut config_path: Option<String> = None;
     let mut i = 0;
     while i < args.len() {
         if (args[i] == "--config" || args[i] == "-c") && i + 1 < args.len() {
-            config_path = Some(PathBuf::from(&args[i + 1]));
+            config_path = Some(args[i + 1].clone());
             i += 2;
-        } else if args[i] == "--dump-config" {
-            print_default_config();
-            std::process::exit(0);
         } else {
             i += 1;
         }
     }
 
     let path = config_path
-        .or_else(|| env::var("VOIDFETCH_CONFIG").ok().map(PathBuf::from))
-        .or_else(|| dirs_config().map(|p| p.join("config.css")))
-        .or_else(|| Some(PathBuf::from("/etc/voidfetch/config.css")));
+        .or_else(|| env::var("VOIDFETCH_CONFIG").ok())
+        .or_else(|| {
+            dirs_config().map(|p| p.join("config.css").to_string_lossy().to_string())
+        })
+        .or_else(|| Some("/etc/voidfetch/config.css".to_string()));
 
     if let Some(p) = path {
-        if p.exists() {
-            if let Ok(content) = fs::read_to_string(&p) {
-                apply_css_config(&mut cfg, &content, &p);
+        let pb = PathBuf::from(&p);
+        if pb.exists() {
+            if let Ok(content) = fs::read_to_string(&pb) {
+                apply_css_config(&mut cfg, &content, &pb);
             }
         }
     }
 
+    cfg
+}
+
+pub fn load_with_path(path: &str) -> Config {
+    let mut cfg = Config::default();
+    let pb = PathBuf::from(path);
+    if pb.exists() {
+        if let Ok(content) = fs::read_to_string(&pb) {
+            apply_css_config(&mut cfg, &content, &pb);
+        }
+    } else {
+        eprintln!("\x1b[33m[!]\x1b[0m config not found: {}", path);
+    }
     cfg
 }
 
@@ -177,13 +194,19 @@ fn dirs_config() -> Option<PathBuf> {
     }
 }
 
-fn get_examples_dir() -> PathBuf {
+fn find_examples_dir() -> PathBuf {
     if let Ok(home) = env::var("HOME") {
         let local = PathBuf::from(&home).join(".local").join("bin").join("examples");
         if local.is_dir() {
-            return local;
+            let has_files = fs::read_dir(&local)
+                .map(|mut r| r.next().is_some())
+                .unwrap_or(false);
+            if has_files {
+                return local;
+            }
         }
     }
+
     let exe_dir = env::current_exe()
         .ok()
         .and_then(|p| p.parent().map(|p| p.to_path_buf()))
@@ -191,25 +214,51 @@ fn get_examples_dir() -> PathBuf {
 
     let candidates = [
         exe_dir.join("examples"),
-        exe_dir.parent().unwrap_or(&exe_dir).join("examples"),
         exe_dir.join("..").join("examples"),
         exe_dir.join("..").join("..").join("examples"),
-        PathBuf::from("examples"),
+        exe_dir.join("../share/voidfetch/examples"),
     ];
 
     for c in &candidates {
-        if c.is_dir() && !c.read_dir().map(|mut r| r.next().is_none()).unwrap_or(true) {
-            return c.clone();
+        if c.is_dir() {
+            let has_files = fs::read_dir(c)
+                .map(|mut r| r.next().is_some())
+                .unwrap_or(false);
+            if has_files {
+                return c.clone();
+            }
         }
     }
+
+    if let Ok(cwd) = env::current_dir() {
+        let cwd_examples = cwd.join("examples");
+        if cwd_examples.is_dir() {
+            let has_files = fs::read_dir(&cwd_examples)
+                .map(|mut r| r.next().is_some())
+                .unwrap_or(false);
+            if has_files {
+                return cwd_examples;
+            }
+        }
+    }
+
     exe_dir.join("examples")
 }
 
 fn resolve_variables(content: &str, variables: &HashMap<String, String>) -> String {
     let mut result = content.to_string();
-    for (key, value) in variables {
-        let placeholder = format!("${{{}}}", key);
-        result = result.replace(&placeholder, value);
+    for _ in 0..5 {
+        let mut changed = false;
+        for (key, value) in variables {
+            let placeholder = format!("${{{}}}", key);
+            if result.contains(&placeholder) {
+                result = result.replace(&placeholder, value);
+                changed = true;
+            }
+        }
+        if !changed {
+            break;
+        }
     }
     result
 }
@@ -360,6 +409,126 @@ fn apply_theme(cfg: &mut Config, theme_name: &str) {
             cfg.colors.separator_color = "#96a7c9".into();
             cfg.colors.title_color = "#478061".into();
         }
+        "sakura" | "sakura-pink" => {
+            cfg.colors.user = "#ffb7c5".into();
+            cfg.colors.host = "#ff69b4".into();
+            cfg.colors.label = "#ffb7c5".into();
+            cfg.colors.value = "#fff0f5".into();
+            cfg.colors.separator_color = "#db7093".into();
+            cfg.colors.title_color = "#ffb7c5".into();
+        }
+        "blood" | "blood-moon" => {
+            cfg.colors.user = "#dc143c".into();
+            cfg.colors.host = "#8b0000".into();
+            cfg.colors.label = "#dc143c".into();
+            cfg.colors.value = "#ffe4e1".into();
+            cfg.colors.separator_color = "#8b0000".into();
+            cfg.colors.title_color = "#dc143c".into();
+        }
+        "ocean" | "midnight-ocean" => {
+            cfg.colors.user = "#00ced1".into();
+            cfg.colors.host = "#20b2aa".into();
+            cfg.colors.label = "#00ced1".into();
+            cfg.colors.value = "#e0ffff".into();
+            cfg.colors.separator_color = "#2f4f4f".into();
+            cfg.colors.title_color = "#00ced1".into();
+        }
+        "forest" => {
+            cfg.colors.user = "#228b22".into();
+            cfg.colors.host = "#32cd32".into();
+            cfg.colors.label = "#228b22".into();
+            cfg.colors.value = "#f0fff0".into();
+            cfg.colors.separator_color = "#006400".into();
+            cfg.colors.title_color = "#228b22".into();
+        }
+        "lavender" | "lavender-dreams" => {
+            cfg.colors.user = "#e6e6fa".into();
+            cfg.colors.host = "#d8bfd8".into();
+            cfg.colors.label = "#e6e6fa".into();
+            cfg.colors.value = "#fffff0".into();
+            cfg.colors.separator_color = "#9370db".into();
+            cfg.colors.title_color = "#e6e6fa".into();
+        }
+        "amber" | "amber-glow" => {
+            cfg.colors.user = "#ffbf00".into();
+            cfg.colors.host = "#ff8c00".into();
+            cfg.colors.label = "#ffbf00".into();
+            cfg.colors.value = "#fffacd".into();
+            cfg.colors.separator_color = "#ff6347".into();
+            cfg.colors.title_color = "#ffbf00".into();
+        }
+        "emerald" | "emerald-sea" => {
+            cfg.colors.user = "#50c878".into();
+            cfg.colors.host = "#00fa9a".into();
+            cfg.colors.label = "#50c878".into();
+            cfg.colors.value = "#f0fff0".into();
+            cfg.colors.separator_color = "#2e8b57".into();
+            cfg.colors.title_color = "#50c878".into();
+        }
+        "ice" | "ice-blue" => {
+            cfg.colors.user = "#add8e6".into();
+            cfg.colors.host = "#b0e0e6".into();
+            cfg.colors.label = "#add8e6".into();
+            cfg.colors.value = "#f0f8ff".into();
+            cfg.colors.separator_color = "#4682b4".into();
+            cfg.colors.title_color = "#add8e6".into();
+        }
+        "pastel" | "pastel-dream" => {
+            cfg.colors.user = "#ffb3ba".into();
+            cfg.colors.host = "#bae1ff".into();
+            cfg.colors.label = "#ffb3ba".into();
+            cfg.colors.value = "#ffffba".into();
+            cfg.colors.separator_color = "#baffc9".into();
+            cfg.colors.title_color = "#ffb3ba".into();
+        }
+        "crimson" | "crimson-tide" => {
+            cfg.colors.user = "#b22222".into();
+            cfg.colors.host = "#cd5c5c".into();
+            cfg.colors.label = "#b22222".into();
+            cfg.colors.value = "#fff5ee".into();
+            cfg.colors.separator_color = "#8b0000".into();
+            cfg.colors.title_color = "#b22222".into();
+        }
+        "golden" | "golden-hour" => {
+            cfg.colors.user = "#daa520".into();
+            cfg.colors.host = "#b8860b".into();
+            cfg.colors.label = "#daa520".into();
+            cfg.colors.value = "#fff8dc".into();
+            cfg.colors.separator_color = "#8b6914".into();
+            cfg.colors.title_color = "#daa520".into();
+        }
+        "space" | "space-gray" => {
+            cfg.colors.user = "#708090".into();
+            cfg.colors.host = "#778899".into();
+            cfg.colors.label = "#708090".into();
+            cfg.colors.value = "#c0c0c0".into();
+            cfg.colors.separator_color = "#2f4f4f".into();
+            cfg.colors.title_color = "#708090".into();
+        }
+        "royal" | "royal-purple" => {
+            cfg.colors.user = "#7851a9".into();
+            cfg.colors.host = "#9370db".into();
+            cfg.colors.label = "#7851a9".into();
+            cfg.colors.value = "#e6e6fa".into();
+            cfg.colors.separator_color = "#4b0082".into();
+            cfg.colors.title_color = "#7851a9".into();
+        }
+        "abyss" | "abyssal-deep" => {
+            cfg.colors.user = "#191970".into();
+            cfg.colors.host = "#000080".into();
+            cfg.colors.label = "#4169e1".into();
+            cfg.colors.value = "#e6e6fa".into();
+            cfg.colors.separator_color = "#00008b".into();
+            cfg.colors.title_color = "#4169e1".into();
+        }
+        "solar" | "solar-flare" => {
+            cfg.colors.user = "#ff4500".into();
+            cfg.colors.host = "#ff6347".into();
+            cfg.colors.label = "#ff4500".into();
+            cfg.colors.value = "#ffdead".into();
+            cfg.colors.separator_color = "#ff8c00".into();
+            cfg.colors.title_color = "#ff4500".into();
+        }
         _ => {
             eprintln!("\x1b[33m[!]\x1b[0m unknown theme: {}", theme_name);
         }
@@ -449,6 +618,28 @@ fn apply_style(cfg: &mut Config, style_name: &str) {
             cfg.custom_lines.clear();
             cfg.custom_lines.push("C:\\> SYSTEM READY_".into());
         }
+        "clean" | "plain" => {
+            cfg.bold = false;
+            cfg.dim = false;
+            cfg.labels_capitalize = true;
+            cfg.labels_uppercase = false;
+            cfg.logo.enabled = false;
+            cfg.custom_lines.clear();
+            cfg.separator = ":".into();
+            cfg.padding = 1;
+        }
+        "rainbow" => {
+            cfg.bold = true;
+            cfg.dim = false;
+            cfg.glow = true;
+            cfg.colors.user = "#ff0000".into();
+            cfg.colors.host = "#ff7700".into();
+            cfg.colors.label = "#ffff00".into();
+            cfg.colors.value = "#00ff00".into();
+            cfg.colors.separator_color = "#0000ff".into();
+            cfg.colors.title_color = "#8b00ff".into();
+            cfg.separator = "彩虹".into();
+        }
         _ => {
             eprintln!("\x1b[33m[!]\x1b[0m unknown style: {}", style_name);
         }
@@ -456,7 +647,7 @@ fn apply_style(cfg: &mut Config, style_name: &str) {
 }
 
 fn parse_value(val: &str) -> String {
-    val.trim().trim_matches('"').trim_matches('\'').trim_matches(';').trim().to_string()
+    val.trim().trim_matches(';').trim_matches('"').trim_matches('\'').trim().to_string()
 }
 
 fn parse_bool(val: &str) -> bool {
@@ -514,7 +705,7 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
                 let resolved_path = if import_path.starts_with('/') {
                     PathBuf::from(&import_path)
                 } else {
-                    get_examples_dir().join(&import_path)
+                    find_examples_dir().join(&import_path)
                 };
 
                 if resolved_path.exists() {
@@ -536,10 +727,31 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
                 .trim_start_matches('{')
                 .trim_end_matches('}')
                 .trim()
+                .trim_matches('"')
+                .trim_matches('\'')
+                .trim_matches(';')
                 .to_string();
 
             if !theme_name.is_empty() {
                 apply_theme(cfg, &theme_name);
+            }
+            continue;
+        }
+
+        if clean_line.starts_with("@style") {
+            let style_val = clean_line
+                .trim_start_matches("@style")
+                .trim()
+                .trim_start_matches('{')
+                .trim_end_matches('}')
+                .trim()
+                .trim_matches('"')
+                .trim_matches('\'')
+                .trim_matches(';')
+                .to_string();
+
+            if !style_val.is_empty() {
+                apply_style(cfg, &style_val);
             }
             continue;
         }
@@ -553,6 +765,7 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
                 .trim()
                 .trim_matches('"')
                 .trim_matches('\'')
+                .trim_matches(';')
                 .to_string();
 
             if !font_name.is_empty() {
@@ -675,9 +888,35 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
             continue;
         }
 
-        if clean_line.starts_with("@style") {
-            let style_val = clean_line
-                .trim_start_matches("@style")
+        if clean_line.starts_with("@color") {
+            let color_body = clean_line
+                .trim_start_matches("@color")
+                .trim()
+                .trim_start_matches('{')
+                .trim_end_matches('}')
+                .trim()
+                .to_string();
+
+            if let Some((key, val)) = color_body.split_once(':') {
+                let k = key.trim().to_lowercase();
+                let v = parse_value(val);
+                match k.as_str() {
+                    "user" => cfg.colors.user = v,
+                    "host" => cfg.colors.host = v,
+                    "label" => cfg.colors.label = v,
+                    "value" => cfg.colors.value = v,
+                    "separator" | "sep" => cfg.colors.separator_color = v,
+                    "title" => cfg.colors.title_color = v,
+                    "logo" => cfg.colors.logo = v,
+                    _ => {}
+                }
+            }
+            continue;
+        }
+
+        if clean_line.starts_with("@palette") {
+            let palette_name = clean_line
+                .trim_start_matches("@palette")
                 .trim()
                 .trim_start_matches('{')
                 .trim_end_matches('}')
@@ -687,13 +926,36 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
                 .trim_matches(';')
                 .to_string();
 
-            if !style_val.is_empty() {
-                apply_style(cfg, &style_val);
+            if !palette_name.is_empty() {
+                apply_palette(cfg, &palette_name);
             }
             continue;
         }
 
-        if clean_line.starts_with("$") {
+        if clean_line.starts_with("@reset") {
+            let defaults = Config::default();
+            cfg.colors = defaults.colors;
+            cfg.info = defaults.info;
+            cfg.logo = defaults.logo;
+            cfg.title = defaults.title;
+            cfg.separator = defaults.separator;
+            cfg.padding = defaults.padding;
+            cfg.bold = defaults.bold;
+            cfg.dim = defaults.dim;
+            cfg.labels_uppercase = defaults.labels_uppercase;
+            cfg.labels_capitalize = defaults.labels_capitalize;
+            cfg.custom_lines.clear();
+            cfg.color_mode = defaults.color_mode;
+            cfg.font = defaults.font;
+            cfg.layout = defaults.layout;
+            cfg.italic = false;
+            cfg.underline = false;
+            cfg.glow = false;
+            cfg.style = defaults.style;
+            continue;
+        }
+
+        if clean_line.starts_with('$') {
             if let Some((key, val)) = clean_line.split_once(':') {
                 let var_name = key.trim().trim_start_matches('$').trim().to_string();
                 let var_val = parse_value(val);
@@ -758,6 +1020,86 @@ fn apply_css_config_raw(cfg: &mut Config, content: &str, config_path: &PathBuf) 
 
 pub fn apply_css_config_pub(cfg: &mut Config, content: &str, config_path: &PathBuf) {
     apply_css_config(cfg, content, config_path);
+}
+
+fn apply_palette(cfg: &mut Config, palette_name: &str) {
+    match palette_name.to_lowercase().as_str() {
+        "nord" => {
+            cfg.colors.user = "#88c0d0".into();
+            cfg.colors.host = "#81a1c1".into();
+            cfg.colors.label = "#a3be8c".into();
+            cfg.colors.value = "#eceff4".into();
+            cfg.colors.separator_color = "#4c566a".into();
+            cfg.colors.title_color = "#88c0d0".into();
+        }
+        "dracula" => {
+            cfg.colors.user = "#bd93f9".into();
+            cfg.colors.host = "#ff79c6".into();
+            cfg.colors.label = "#50fa7b".into();
+            cfg.colors.value = "#f8f8f2".into();
+            cfg.colors.separator_color = "#6272a4".into();
+            cfg.colors.title_color = "#bd93f9".into();
+        }
+        "catppuccin" => {
+            cfg.colors.user = "#cba6f7".into();
+            cfg.colors.host = "#f5c2e7".into();
+            cfg.colors.label = "#a6e3a1".into();
+            cfg.colors.value = "#cdd6f4".into();
+            cfg.colors.separator_color = "#585b70".into();
+            cfg.colors.title_color = "#cba6f7".into();
+        }
+        "gruvbox" => {
+            cfg.colors.user = "#fabd2f".into();
+            cfg.colors.host = "#fe8019".into();
+            cfg.colors.label = "#b8bb26".into();
+            cfg.colors.value = "#ebdbb2".into();
+            cfg.colors.separator_color = "#928374".into();
+            cfg.colors.title_color = "#fabd2f".into();
+        }
+        "solarized" => {
+            cfg.colors.user = "#268bd2".into();
+            cfg.colors.host = "#2aa198".into();
+            cfg.colors.label = "#859900".into();
+            cfg.colors.value = "#839496".into();
+            cfg.colors.separator_color = "#586e75".into();
+            cfg.colors.title_color = "#268bd2".into();
+        }
+        "tokyo" => {
+            cfg.colors.user = "#7aa2f7".into();
+            cfg.colors.host = "#bb9af7".into();
+            cfg.colors.label = "#9ece6a".into();
+            cfg.colors.value = "#c0caf5".into();
+            cfg.colors.separator_color = "#414868".into();
+            cfg.colors.title_color = "#7aa2f7".into();
+        }
+        "rainbow" => {
+            cfg.colors.user = "#ff0000".into();
+            cfg.colors.host = "#ff7700".into();
+            cfg.colors.label = "#ffff00".into();
+            cfg.colors.value = "#00ff00".into();
+            cfg.colors.separator_color = "#0000ff".into();
+            cfg.colors.title_color = "#8b00ff".into();
+        }
+        "monochrome" | "mono" => {
+            cfg.colors.user = "#ffffff".into();
+            cfg.colors.host = "#cccccc".into();
+            cfg.colors.label = "#999999".into();
+            cfg.colors.value = "#ffffff".into();
+            cfg.colors.separator_color = "#666666".into();
+            cfg.colors.title_color = "#ffffff".into();
+        }
+        "pastel" => {
+            cfg.colors.user = "#ffb3ba".into();
+            cfg.colors.host = "#bae1ff".into();
+            cfg.colors.label = "#baffc9".into();
+            cfg.colors.value = "#ffffba".into();
+            cfg.colors.separator_color = "#e8baff".into();
+            cfg.colors.title_color = "#ffb3ba".into();
+        }
+        _ => {
+            eprintln!("\x1b[33m[!]\x1b[0m unknown palette: {}", palette_name);
+        }
+    }
 }
 
 fn apply_properties(cfg: &mut Config, all_props: &[(String, String)]) {
@@ -838,23 +1180,41 @@ pub fn print_default_config() {
 /* @import "24-matrix-green.css"; */
 /* @import "29-vaporwave.css"; */
 
-/* --- or use a built-in theme --- */
-/* @theme arctic; */
-/* @theme dracula; */
-/* @theme catppuccin; */
-/* @theme nord; */
-/* @theme matrix; */
-/* @theme vaporwave; */
-/* @theme retro; */
+/* --- or use a built-in theme (33 themes) --- */
+/* @theme arctic;   @theme sunset;    @theme neon; */
+/* @theme dracula;  @theme tokyo;     @theme gruvbox; */
+/* @theme catppuccin; @theme monokai; @theme nord; */
+/* @theme onedark;  @theme rosepine;  @theme solarized; */
+/* @theme github;   @theme palenight; @theme matrix; */
+/* @theme vaporwave; @theme retro;    @theme void; */
+/* @theme sakura;   @theme blood;     @theme ocean; */
+/* @theme forest;   @theme lavender;  @theme amber; */
+/* @theme emerald;  @theme ice;       @theme pastel; */
+/* @theme crimson;  @theme golden;    @theme space; */
+/* @theme royal;    @theme abyss;     @theme solar; */
 
 /* --- or use a style preset --- */
 /* @style minimal; */
 /* @style compact; */
+/* @style full; */
 /* @style fancy; */
 /* @style hacker; */
 /* @style retro; */
+/* @style clean; */
+/* @style rainbow; */
 
-/* --- variables --- */
+/* --- or use a palette (9 palettes) --- */
+/* @palette nord; */
+/* @palette dracula; */
+/* @palette catppuccin; */
+/* @palette gruvbox; */
+/* @palette solarized; */
+/* @palette tokyo; */
+/* @palette rainbow; */
+/* @palette mono; */
+/* @palette pastel; */
+
+/* --- variables (recursive) --- */
 $accent: #88c0d0;
 $bg: #2e3440;
 $username: void;
@@ -919,34 +1279,17 @@ $hostname: fetcher;
     uppercase: false;
 }}
 
-/* --- layout --- */
-/* @layout "side"; */
-/* @layout "top"; */
-/* @layout "bottom"; */
-
-/* --- font style for ascii art --- */
-/* @font "default"; */
-/* @font "small"; */
-/* @font "large"; */
-
-/* --- separator shorthand --- */
-/* @separator "─"; */
+/* --- shortcuts --- */
+/* @color {{ user: red; }} */
 /* @separator "═"; */
-/* @separator "─·─"; */
-
-/* --- margin/padding --- */
 /* @margin 2; */
-/* @margin 4; */
-
-/* --- opacity/dim --- */
-/* @opacity low; */
-/* @opacity medium; */
 /* @opacity high; */
-
-/* --- text effects --- */
 /* @italic true; */
 /* @underline true; */
 /* @glow true; */
+/* @layout "side"; */
+/* @font "default"; */
+/* @reset; */
 
 /* --- order of info fields --- */
 @order {{
@@ -963,62 +1306,33 @@ $hostname: fetcher;
     line: "════════════════════════════════";
 }}
 
-/* --- COLOR EXAMPLES ---
+/* --- SYNTAX REFERENCE ---
  *
- * Named colors:
- *   red, green, yellow, blue, magenta, cyan, white, gray,
- *   orange, pink, lime, violet, indigo, coral, salmon,
- *   gold, crimson, turquoise, aqua, purple, teal
+ * Variables:     $name: value;   use: $name
+ * Import:        @import "file.css";
+ * Themes:        @theme dracula;
+ * Styles:        @style minimal;
+ * Palettes:      @palette nord;
+ * Colors:        @color {{ user: red; }}
+ * Separator:     @separator "═";
+ * Margin:        @margin 4;
+ * Opacity:       @opacity low;
+ * Italic:        @italic true;
+ * Underline:     @underline true;
+ * Glow:          @glow true;
+ * Layout:        @layout "side";
+ * Font:          @font "small";
+ * Reset:         @reset;
  *
- * Hex colors:
- *   color: #ff6600;
+ * Named colors:  red, green, yellow, blue, magenta, cyan,
+ *                white, gray, orange, pink, lime, violet,
+ *                indigo, coral, salmon, gold, crimson,
+ *                turquoise, aqua, purple, teal
  *
- * RGB:
- *   color: rgb(255, 102, 0);
- *
- * 256-color:
- *   color: 256(208);
- *
- * ANSI:
- *   color: ansi(3);
- *
- * Disable:
- *   color: none;
- *
- * Variables:
- *   $varname: value;
- *   color: $varname;
- *
- * Import examples:
- *   @import "01-arctic-frost.css";
- *
- * Built-in themes:
- *   @theme arctic, dracula, catppuccin, nord, matrix,
- *   @theme vaporwave, retro, tokyo, gruvbox, rosepine,
- *   @theme solarized, github, palenight, void, neon,
- *   @theme sunset, monokai, onedark
- *
- * Style presets:
- *   @style minimal, compact, full, fancy, hacker, retro
- *
- * Layout:
- *   @layout "side", "top", "bottom"
- *
- * ASCII art font:
- *   @font "default", "small"
- *
- * Separator shorthand:
- *   @separator "═";
- *
- * Margin/Padding:
- *   @margin 2;
- *
- * Opacity:
- *   @opacity low, medium, high, max
- *
- * Text effects:
- *   @italic true;
- *   @underline true;
- *   @glow true;
+ * Hex:           #ff6600
+ * RGB:           rgb(255, 102, 0)
+ * 256-color:     256(208)
+ * ANSI:          ansi(3)
+ * None:          none
 "#, env!("CARGO_PKG_VERSION"));
 }

@@ -9,16 +9,30 @@ fn logos_dir() -> PathBuf {
     let exe = env::current_exe().unwrap_or_default();
     let exe_dir = exe.parent().unwrap_or(&PathBuf::from(".")).to_path_buf();
 
-    let paths = vec![
+    let candidates = vec![
         exe_dir.join("logos"),
+        exe_dir.join("..").join("logos"),
+        exe_dir.join("..").join("..").join("logos"),
         exe_dir.join("../share/voidfetch/logos"),
         PathBuf::from("/usr/share/voidfetch/logos"),
         PathBuf::from("/usr/local/share/voidfetch/logos"),
     ];
 
-    for p in paths {
+    for p in &candidates {
         if p.is_dir() {
-            return p;
+            let has_files = fs::read_dir(p)
+                .map(|mut r| r.next().is_some())
+                .unwrap_or(false);
+            if has_files {
+                return p.clone();
+            }
+        }
+    }
+
+    if let Ok(home) = env::var("HOME") {
+        let local = PathBuf::from(&home).join(".local").join("bin").join("logos");
+        if local.is_dir() {
+            return local;
         }
     }
 
@@ -62,7 +76,7 @@ fn detect_distro() -> String {
         ("funtoo", "gentoo"), ("solus", "solus"), ("pardus", "pardus"),
         ("nixos", "nixos"), ("slackware", "slackware"), ("mx", "mx"),
         ("lynx", "lynx"), ("feren", "feren"), ("asahi", "asahi"),
-        ("android", "android"),
+        ("android", "android"), ("haiku", "haiku"),
     ];
 
     for (distro_id, logo_name) in &aliases {

@@ -3,9 +3,13 @@ pub const BOLD: &str = "\x1b[1m";
 pub const DIM: &str = "\x1b[2m";
 pub const ITALIC: &str = "\x1b[3m";
 pub const UNDERLINE: &str = "\x1b[4m";
+#[allow(dead_code)]
 pub const BLINK: &str = "\x1b[5m";
+#[allow(dead_code)]
 pub const REVERSE: &str = "\x1b[7m";
+#[allow(dead_code)]
 pub const HIDDEN: &str = "\x1b[8m";
+#[allow(dead_code)]
 pub const STRIKETHROUGH: &str = "\x1b[9m";
 
 pub fn color(name: &str) -> String {
