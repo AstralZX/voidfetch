@@ -27,7 +27,7 @@ minimal system information tool. config is CSS.
 - **33 built-in themes** - dracula, nord, catppuccin, gruvbox, and more
 - **8 style presets** - minimal, compact, fancy, hacker, retro, clean, rainbow
 - **9 palettes** - nord, dracula, catppuccin, gruvbox, solarized, tokyo, rainbow, mono, pastel
-- **50+ distro logos** - with color support
+- **542 distro logos** - with color support
 - **16 info fields** - OS, kernel, CPU, GPU, memory, disk, uptime, packages, battery, resolution, and more
 - **full color control** - named colors, hex, RGB, 256-color, ANSI
 - **variables** - define and reuse values across your config

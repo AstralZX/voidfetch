@@ -98,10 +98,6 @@ fn get_config_dir() -> PathBuf {
         .join(".config").join("voidfetch")
 }
 
-fn get_logos_dir() -> PathBuf {
-    get_install_dir().join("logos")
-}
-
 fn get_examples_install_dir() -> PathBuf {
     get_install_dir().join("examples")
 }
@@ -152,7 +148,7 @@ fn list_examples() {
 }
 
 fn list_logos() {
-    let logos_dir = get_logos_dir();
+    let logos_dir = logo::logos_dir();
     println!("\x1b[36mvoidfetch\x1b[0m - available logos:\n");
 
     if !logos_dir.is_dir() {
@@ -243,7 +239,7 @@ fn open_cred() {
 
 fn sync() {
     let install_dir = get_install_dir();
-    let logos_dir = get_logos_dir();
+    let logos_dir = logo::logos_dir();
     let examples_dir = get_examples_install_dir();
     let tmp_dir = dirs_home().join(".voidfetch_sync_tmp");
 
