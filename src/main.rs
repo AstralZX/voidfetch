@@ -3,6 +3,9 @@ use std::fs;
 use std::io::{self, Write};
 use std::path::PathBuf;
 use std::process::Command;
+use std::sync::Mutex;
+
+static LOGO_OVERRIDE: Mutex<Option<String>> = Mutex::new(None);
 
 mod ansi;
 mod config;
@@ -24,6 +27,14 @@ fn main() {
         "--list-themes" => return list_themes(),
         "--list-examples" => return list_examples(),
         "--list-logos" => return list_logos(),
+        "--logo" => {
+            if args.len() < 2 {
+                eprintln!("\x1b[31m[-]\x1b[0m --logo requires a distro name");
+                return;
+            }
+            *LOGO_OVERRIDE.lock().unwrap() = Some(args[1].clone());
+            return run_display(None);
+        }
         "--sync" => return sync(),
         "--explode" => return explode(),
         "-e" | "--example" => {
@@ -47,10 +58,15 @@ fn main() {
 }
 
 fn run_display(config_path: Option<&str>) {
-    let cfg = match config_path {
+    let mut cfg = match config_path {
         Some(p) => config::load_with_path(p),
         None => config::load(),
     };
+
+    if let Some(distro) = LOGO_OVERRIDE.lock().unwrap().take() {
+        cfg.logo.distro = distro;
+    }
+
     let info = info::gather();
     let logo = logo::get(&cfg);
     render(&cfg, &info, &logo);
@@ -68,6 +84,7 @@ OPTIONS:
     -v, --version         print version
     -c, --config <PATH>   use custom config file
     -e, --example N       use example config by number (1-61)
+    --logo <NAME>         override distro logo by name
     --dump-config         print default config to stdout
     --cred                open voidfetch github in browser
     --sync                fetch latest from github, build and install
@@ -79,6 +96,8 @@ OPTIONS:
 EXAMPLES:
     voidfetch
     voidfetch --example 7
+    voidfetch --logo arch
+    voidfetch --logo cachyos
     voidfetch --config ~/myconfig.css
     voidfetch --example 4 --dump-config"#, env!("CARGO_PKG_VERSION")
     );
@@ -175,6 +194,7 @@ fn list_logos() {
             println!("  \x1b[33m{}\x1b[0m", name);
         }
         println!("\n  use \x1b[33m@logo {{ distro: <name>; }}\x1b[0m in your config");
+        println!("  or \x1b[33mvoidfetch --logo <name>\x1b[0m on the CLI");
     }
 }
 
