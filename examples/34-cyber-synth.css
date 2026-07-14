@@ -1,0 +1,51 @@
+/* 34 - cyber synth */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #f72585;
+    host: #7209b7;
+    label: #4cc9f0;
+    value: #f8f9fa;
+    separator: #3a0ca3;
+    title: #f72585;
+    logo: #f72585;
+}
+
+@info {
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #f72585;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    capitalize: true;
+}

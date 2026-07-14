@@ -1,0 +1,51 @@
+/* 17 - cherry blossom */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #f38ba8;
+    host: #eba0ac;
+    label: #fab387;
+    value: #f5e0dc;
+    separator: #585b70;
+    title: #f38ba8;
+    logo: #f38ba8;
+}
+
+@info {
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #f38ba8;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    capitalize: true;
+}

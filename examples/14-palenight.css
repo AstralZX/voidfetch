@@ -1,0 +1,51 @@
+/* 14 - palenight */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #82aaff;
+    host: #c792ea;
+    label: #89ddff;
+    value: #a6accd;
+    separator: #2e3440;
+    title: #82aaff;
+    logo: #c792ea;
+}
+
+@info {
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #c792ea;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    capitalize: true;
+}

@@ -1,0 +1,51 @@
+/* 21 - emerald sea */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #2ecc71;
+    host: #27ae60;
+    label: #1abc9c;
+    value: #ecf0f1;
+    separator: #2c3e50;
+    title: #2ecc71;
+    logo: #2ecc71;
+}
+
+@info {
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #2ecc71;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    capitalize: true;
+}

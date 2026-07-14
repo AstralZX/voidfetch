@@ -1,0 +1,51 @@
+/* 16 - forest */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #a3be8c;
+    host: #ebcb8b;
+    label: #a3be8c;
+    value: #eceff4;
+    separator: #4c566a;
+    title: #a3be8c;
+    logo: #a3be8c;
+}
+
+@info {
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #a3be8c;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    capitalize: true;
+}

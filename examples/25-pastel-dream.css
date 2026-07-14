@@ -1,0 +1,51 @@
+/* 25 - pastel dream */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: false;
+}
+
+@colors {
+    user: #ff6b9d;
+    host: #c084fc;
+    label: #67e8f9;
+    value: #fef3c7;
+    separator: #d1d5db;
+    title: #ff6b9d;
+    logo: #ff6b9d;
+}
+
+@info {
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #ff6b9d;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    capitalize: true;
+}

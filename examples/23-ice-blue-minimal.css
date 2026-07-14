@@ -1,0 +1,51 @@
+/* 23 - ice blue minimal */
+
+:root {
+    separator: " ";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #74b9ff;
+    host: #0984e3;
+    label: #a29bfe;
+    value: #dfe6e9;
+    separator: #636e72;
+    title: #74b9ff;
+    logo: #74b9ff;
+}
+
+@info {
+    os: true;
+    host: false;
+    kernel: true;
+    uptime: true;
+    packages: false;
+    shell: true;
+    terminal: false;
+    de: false;
+    wm: true;
+    cpu: true;
+    gpu: false;
+    memory: true;
+    disk: false;
+    locale: false;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #74b9ff;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    capitalize: true;
+}

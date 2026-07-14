@@ -1,0 +1,57 @@
+/* 29 - vaporwave */
+
+:root {
+    separator: "═";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #ff71ce;
+    host: #01cdfe;
+    label: #05ffa1;
+    value: #b967ff;
+    separator: #fffb96;
+    title: #ff71ce;
+    logo: #ff71ce;
+}
+
+@info {
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #ff71ce;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    uppercase: true;
+}
+
+@custom {
+    line: "══════════════════════════════════";
+    line: "  ▓▒░ vaporwave ░▒▓";
+    line: "══════════════════════════════════";
+}

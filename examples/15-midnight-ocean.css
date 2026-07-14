@@ -1,0 +1,57 @@
+/* 15 - midnight ocean */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #00b4d8;
+    host: #0077b6;
+    label: #48cae4;
+    value: #caf0f8;
+    separator: #023e8a;
+    title: #00b4d8;
+    logo: #0077b6;
+}
+
+@info {
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #00b4d8;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    capitalize: true;
+}
+
+@custom {
+    line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    line: "  deep blue vibes";
+    line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+}

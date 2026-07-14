@@ -1,0 +1,57 @@
+/* 18 - blood moon */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #ff0000;
+    host: #cc0000;
+    label: #ff4444;
+    value: #ffffff;
+    separator: #660000;
+    title: #ff0000;
+    logo: #ff0000;
+}
+
+@info {
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: false;
+    resolution: true;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #ff0000;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
+
+@labels {
+    capitalize: true;
+}
+
+@custom {
+    line: "══════════════════════════════";
+    line: "  rise from the ashes";
+    line: "══════════════════════════════";
+}
