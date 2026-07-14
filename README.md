@@ -165,11 +165,9 @@ the config file is searched in order:
     uppercase: false;
 }
 
-@custom {
-    line: "════════════════════════════════";
-    line: "  voidfetch - embrace the void";
-    line: "════════════════════════════════";
-}
+custom: "════════════════════════════════";
+custom: "  voidfetch - embrace the void";
+custom: "════════════════════════════════";
 ```
 
 ### import example configs
@@ -322,7 +320,7 @@ nord, dracula, catppuccin, gruvbox, solarized, tokyo, rainbow, mono, pastel.
 
 ## supported distros
 
-arch, manjaro, endeavouros, garuda, cachyos, artix, ubuntu, xubuntu, kubuntu, lubuntu, pop!\_os, zorin, debian, raspbian, kali, parrot, linux mint, fedora, nobara, bazzite, ultramarine, rhel, centos, almalinux, rocky, oracle, amazon linux, opensuse, suse, alpine, void, gentoo, funtoo, solus, pardus, nixos, slackware, mx linux, lynx, feren, asahi, freebsd, openbsd, netbsd, dragonflybsd, macos, windows.
+542 distro logos with automatic detection. includes: arch, manjaro, endeavouros, garuda, cachyos, artix, ubuntu, kubuntu, xubuntu, lubuntu, pop!\_os, zorin, debian, kali, parrot, linux mint, lmde, fedora, nobara, bazzite, ultramarine, rhel, centos, almalinux, rocky, oracle, amazon linux, opensuse (leap, tumbleweed, microos, slowroll), alpine, void, gentoo, nixos, slackware, mx linux, elementary, deepin, sparky, tails, manjaro, artix, freebsd, openbsd, netbsd, dragonflybsd, haiku, android, macos, windows, steamdeck, steamos, and 470+ more. run `voidfetch --list-logos` to see all.
 
 ## building
 
@@ -343,7 +341,7 @@ voidfetch/
 │   ├── info.rs        # parallel system info gathering
 │   ├── logo.rs        # logo loader & colorizer
 │   └── ansi.rs        # ANSI color utilities
-├── logos/             # 50+ distro ASCII art files
+├── logos/             # 542 distro ASCII art files
 ├── examples/          # 61 example CSS config presets
 ├── install.sh         # linux/macOS installer
 └── install.ps1        # windows installer

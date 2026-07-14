@@ -285,7 +285,14 @@ fn sync() {
     let _ = fs::create_dir_all(&logos_dir);
     let _ = fs::create_dir_all(&examples_dir);
 
+    println!("\x1b[36m[*]\x1b[0m cleaning old installation...");
+    let _ = fs::remove_dir_all(&logos_dir);
+    let _ = fs::remove_dir_all(&examples_dir);
+    let _ = fs::create_dir_all(&logos_dir);
+    let _ = fs::create_dir_all(&examples_dir);
+
     let bin_dst = install_dir.join(bin_name);
+    let _ = fs::remove_file(&bin_dst);
     if let Err(e) = fs::copy(&bin_src, &bin_dst) {
         eprintln!("\x1b[31m[-]\x1b[0m failed to copy binary: {}", e);
         let _ = fs::remove_dir_all(&tmp_dir);
