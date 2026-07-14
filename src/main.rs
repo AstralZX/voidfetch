@@ -98,10 +98,6 @@ fn get_config_dir() -> PathBuf {
         .join(".config").join("voidfetch")
 }
 
-fn get_examples_install_dir() -> PathBuf {
-    get_install_dir().join("examples")
-}
-
 fn list_themes() {
     let themes = [
         ("arctic", "Arctic Frost"), ("sunset", "Sunset Fire"),
@@ -239,8 +235,8 @@ fn open_cred() {
 
 fn sync() {
     let install_dir = get_install_dir();
-    let logos_dir = logo::logos_dir();
-    let examples_dir = get_examples_install_dir();
+    let logos_dir = install_dir.join("logos");
+    let examples_dir = install_dir.join("examples");
     let tmp_dir = dirs_home().join(".voidfetch_sync_tmp");
 
     println!("\x1b[36m[*]\x1b[0m syncing voidfetch...");
