@@ -28,6 +28,9 @@ cp "$BIN" "$INSTALL_DIR/voidfetch"
 mkdir -p "$INSTALL_DIR/logos"
 cp "$SCRIPT_DIR/logos/"*.txt "$INSTALL_DIR/logos/"
 
+mkdir -p "$INSTALL_DIR/examples"
+cp "$SCRIPT_DIR/examples/"*.css "$INSTALL_DIR/examples/" 2>/dev/null || true
+
 chmod +x "$INSTALL_DIR/voidfetch"
 
 echo "[*] Checking PATH..."

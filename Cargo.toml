@@ -4,7 +4,7 @@ version = "2.0.0"
 edition = "2021"
 description = "minimal system info"
 authors = ["AstralZX"]
-license = "MIT"
+license = "AGPL-3.0"
 repository = "https://github.com/AstralZX/voidfetch"
 
 [dependencies]

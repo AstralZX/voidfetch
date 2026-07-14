@@ -40,6 +40,12 @@ if (!(Test-Path $logosDir)) {
 }
 Copy-Item (Join-Path $ScriptDir "logos\*") -Destination $logosDir -Force
 
+$examplesDir = Join-Path $InstallDir "examples"
+if (!(Test-Path $examplesDir)) {
+    New-Item -ItemType Directory -Path $examplesDir -Force | Out-Null
+}
+Copy-Item (Join-Path $ScriptDir "examples\*") -Destination $examplesDir -Force
+
 Write-Host "[*] Adding to PATH..." -ForegroundColor Cyan
 $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
 if ($userPath -notlike "*$InstallDir*") {

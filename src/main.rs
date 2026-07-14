@@ -31,6 +31,30 @@ fn main() {
         explode();
         return;
     }
+    if args.iter().any(|a| a == "--cred" || a == "--credits") {
+        open_cred();
+        return;
+    }
+    if args.iter().any(|a| a == "--list-themes") {
+        list_themes();
+        return;
+    }
+    if args.iter().any(|a| a == "--list-examples") {
+        list_examples();
+        return;
+    }
+    if args.iter().any(|a| a == "--example" || a == "-e") {
+        let idx = args.iter().position(|a| a == "--example" || a == "-e");
+        if let Some(pos) = idx {
+            if pos + 1 < args.len() {
+                run_example(&args[pos + 1]);
+                return;
+            } else {
+                eprintln!("\x1b[31m[-]\x1b[0m --example requires a number");
+                return;
+            }
+        }
+    }
 
     let cfg = config::load();
     let info = info::gather();
@@ -51,8 +75,26 @@ OPTIONS:
     -v, --version    print version
     --dump-config    print default config to stdout
     --config <PATH>  use custom config file
+    -e, --example N  use example config by number (1-41)
+    --cred           open voidfetch github in browser
     --sync           fetch latest and rebuild
     --explode        uninstall voidfetch from your system
+
+CSS SYNTAX:
+    @import          import example configs from examples/ folder
+    @theme           apply a theme preset
+    @font            set ascii art font style
+    @separator       shorthand for separator config
+    @layout          set layout (side, top, bottom)
+    @margin          shorthand for padding
+    @opacity         set text opacity (dim level)
+    @italic          enable italic text
+    @underline       enable underline
+    @glow            enable glow effect (bright colors)
+    @style           apply style preset (minimal, full, compact)
+    $var             reference variables in values
+    --list-themes    list available themes
+    --list-examples  list example configs
 
 CONFIG:
     Config files use CSS syntax and are searched in:
@@ -94,6 +136,172 @@ fn dirs_data() -> PathBuf {
         PathBuf::from(v)
     } else {
         dirs_home().join(".local").join("share")
+    }
+}
+
+fn list_themes() {
+    let themes = vec![
+        ("arctic", "Arctic Frost", "Icy blues and whites"),
+        ("sunset", "Sunset Fire", "Warm oranges and reds"),
+        ("neon", "Neon Cyberpunk", "Vibrant neon colors"),
+        ("dracula", "Dracula", "Purple and pink"),
+        ("tokyo", "Tokyo Night", "Blue and purple"),
+        ("gruvbox", "Gruvbox Dark", "Yellow and orange"),
+        ("catppuccin", "Catppuccin Mocha", "Purple, pink, and teal"),
+        ("monokai", "Monokai Pro", "Classic monokai colors"),
+        ("nord", "Nord", "Frost blue palette"),
+        ("onedark", "One Dark", "Atom one dark theme"),
+        ("rosepine", "Rose Pine", "Soft pink and purple"),
+        ("solarized", "Solarized Dark", "Solarized color scheme"),
+        ("github", "GitHub Dark", "GitHub dark theme"),
+        ("palenight", "Palenight", "Material palenight"),
+        ("matrix", "Matrix Green", "Green on black"),
+        ("vaporwave", "Vaporwave", "Pink, cyan, and green"),
+        ("retro", "Retro Terminal", "Classic green terminal"),
+        ("void", "Void Purple", "Deep purple void"),
+    ];
+
+    println!("\x1b[36mvoidfetch\x1b[0m - available themes:\n");
+    for (name, display, desc) in themes {
+        println!("  \x1b[33m{:<14}\x1b[0m {} - {}", name, display, desc);
+    }
+    println!("\nuse \x1b[33m@theme {{ name: <theme>; }}\x1b[0m in your config");
+}
+
+fn list_examples() {
+    let examples_dir = get_examples_dir();
+    println!("\x1b[36mvoidfetch\x1b[0m - example configs:\n");
+
+    if examples_dir.is_dir() {
+        if let Ok(entries) = fs::read_dir(&examples_dir) {
+            let mut files: Vec<String> = entries
+                .flatten()
+                .filter_map(|e| {
+                    let name = e.file_name().to_string_lossy().to_string();
+                    if name.ends_with(".css") { Some(name) } else { None }
+                })
+                .collect();
+            files.sort();
+
+            if files.is_empty() {
+                println!("  no example configs found");
+            } else {
+                for (i, name) in files.iter().enumerate() {
+                    let num = i + 1;
+                    let display_name = name.trim_end_matches(".css");
+                    println!("  \x1b[33m{:>2}\x1b[0m  {}", num, display_name);
+                }
+                println!("\n  use \x1b[33mvoidfetch --example <number>\x1b[0m to apply");
+                println!("  or \x1b[33m@import \"<name>.css\"\x1b[0m in your config");
+            }
+        }
+    } else {
+        println!("  examples directory not found at: {}", examples_dir.display());
+    }
+}
+
+fn run_example(num_str: &str) {
+    let num: usize = match num_str.parse() {
+        Ok(n) => n,
+        Err(_) => {
+            eprintln!("\x1b[31m[-]\x1b[0m invalid example number: {}", num_str);
+            return;
+        }
+    };
+
+    if num < 1 {
+        eprintln!("\x1b[31m[-]\x1b[0m example number must be >= 1");
+        return;
+    }
+
+    let examples_dir = get_examples_dir();
+    if !examples_dir.is_dir() {
+        eprintln!("\x1b[31m[-]\x1b[0m examples directory not found");
+        return;
+    }
+
+    let mut files: Vec<String> = fs::read_dir(&examples_dir)
+        .into_iter()
+        .flatten()
+        .filter_map(|e| e.ok())
+        .filter_map(|e| {
+            let name = e.file_name().to_string_lossy().to_string();
+            if name.ends_with(".css") { Some(name) } else { None }
+        })
+        .collect();
+    files.sort();
+
+    if num > files.len() {
+        eprintln!("\x1b[31m[-]\x1b[0m example {} not found (max: {})", num, files.len());
+        return;
+    }
+
+    let filename = &files[num - 1];
+    let path = examples_dir.join(filename);
+
+    if let Ok(content) = fs::read_to_string(&path) {
+        let mut cfg = config::Config::default();
+        config::apply_css_config_pub(&mut cfg, &content, &path);
+
+        let info = info::gather();
+        let logo = logo::get(&cfg);
+
+        println!("\x1b[36m[*]\x1b[0m using example {}: {}\n", num, filename.trim_end_matches(".css"));
+        render(&cfg, &info, &logo);
+    } else {
+        eprintln!("\x1b[31m[-]\x1b[0m failed to read example: {}", path.display());
+    }
+}
+
+fn get_examples_dir() -> PathBuf {
+    if let Ok(home) = env::var("HOME") {
+        let local = PathBuf::from(&home).join(".local").join("bin").join("examples");
+        if local.is_dir() {
+            return local;
+        }
+    }
+    let exe_dir = env::current_exe()
+        .ok()
+        .and_then(|p| p.parent().map(|p| p.to_path_buf()))
+        .unwrap_or_else(|| PathBuf::from("."));
+
+    let candidates = [
+        exe_dir.join("examples"),
+        exe_dir.parent().unwrap_or(&exe_dir).join("examples"),
+        exe_dir.join("..").join("examples"),
+        exe_dir.join("..").join("..").join("examples"),
+        PathBuf::from("examples"),
+    ];
+
+    for c in &candidates {
+        if c.is_dir() && !c.read_dir().map(|mut r| r.next().is_none()).unwrap_or(true) {
+            return c.clone();
+        }
+    }
+    exe_dir.join("examples")
+}
+
+fn open_cred() {
+    let url = "https://github.com/AstralZX/voidfetch";
+    println!("\x1b[36m[*]\x1b[0m opening voidfetch github...");
+    println!("\x1b[90m    {}\x1b[0m", url);
+
+    let status = if cfg!(target_os = "macos") {
+        Command::new("open").arg(url).status()
+    } else if cfg!(target_os = "windows") {
+        Command::new("cmd").args(["/C", "start", url]).status()
+    } else {
+        Command::new("xdg-open").arg(url).status()
+    };
+
+    match status {
+        Ok(s) if s.success() => {
+            println!("\x1b[32m[+]\x1b[0m opened in browser!");
+        }
+        _ => {
+            eprintln!("\x1b[31m[-]\x1b[0m failed to open browser. visit manually:");
+            eprintln!("    {}", url);
+        }
     }
 }
 
