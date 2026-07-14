@@ -3,20 +3,28 @@
 minimal system information tool. config is CSS.
 
 ```
-                    -`                  @perfectcachy
-                   .o+`                 #############
-                  `ooo/                 Os: CachyOS
-                 `+oooo:                Host: Gaming PC
-                `+oooooo:               Kernel: 7.1.3-2-cachyos-bore
-               -+oooooo+:              Uptime: 23 minutes
-             `/:-:++oooo+:             Packages: 1445 (pacman)
-            `/++++/+++++++:            Shell: zsh
-           `/++++++++++++++:           Terminal: xterm-kitty
-          `/+++oooooooooooo/`         De: Hyprland
-         ./ooosssso++osssssso+`        Wm: Hyprland
-        .oossssso-````/ossssss+`       Cpu: 12th Gen Intel i5-12400F (12c)
-       -osssssso.      :ssssssso.      Memory: 5061MB / 15792MB
-      :osssssss/        osssso+++.     Disk: 35G/928G (4%)
+           .-------------------------:                 @perfectcachy
+          .+========================.                 #############
+         :++===++===============- :++-        Os: CachyOS
+        :*++====+++++===========-        .==:        Host: Gaming PC
+       -*+++=====+***++========= Kernel: 7.1.3-2-cachyos-bore
+      =*++++=======------------:                      Uptime: 23 minutes
+     =*+++++====-                     ...             Packages: 1445 (pacman)
+   .+*+++++=-===:                    .=++=:           Shell: zsh
+  :++++=====-==:                     -****+           Terminal: xterm-kitty
+ :++=======-=.                      .=+**+.          De: Hyprland
+.+==========-.                                    Wm: Hyprland
+ :++++++++====-                                .--==-.  Cpu: 12th Gen Intel i5-12400F (12c)
+  :++==========.                             :++++++:  Gpu: NVIDIA GeForce RTX 3050
+   .-===========.                            =*****+*+ Memory: 5061MB / 15792MB
+    .-===========:                           .+*****+:  Disk: 35G/928G (4%)
+      -=======++++:::::::::::::::::::::::::-:  .---:   Locale: en_SE.UTF-8
+       :======++++====+++******************=.          Resolution: 1920x1080
+        :=====+++==========++++++++++++++*-
+         .====++==============++++++++++*-
+          .===+==================+++++++:
+           .-======================+++:
+             ..........................
 ```
 
 ## features
