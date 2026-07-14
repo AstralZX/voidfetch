@@ -298,7 +298,7 @@ fn apply_css_config(cfg: &mut Config, content: &str) {
     }
 }
 
-fn print_default_config() {
+pub fn print_default_config() {
     println!(r#"/* voidfetch config - YES THIS IS CSS. DEAL WITH IT. */
 /* put this at ~/.config/voidfetch/config.css */
 
