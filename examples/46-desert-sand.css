@@ -1,0 +1,28 @@
+/* 46 - desert sand */
+
+:root {
+    separator: "·";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #d2691e;
+    host: #cd853f;
+    label: #deb887;
+    value: #faebd7;
+    separator: #a0522d;
+    title: #d2691e;
+    logo: #cd853f;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #d2691e;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

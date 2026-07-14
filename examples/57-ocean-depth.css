@@ -1,0 +1,28 @@
+/* 57 - ocean depth */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #006994;
+    host: #008b8b;
+    label: #48d1cc;
+    value: #e0ffff;
+    separator: #003366;
+    title: #006994;
+    logo: #008b8b;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #006994;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

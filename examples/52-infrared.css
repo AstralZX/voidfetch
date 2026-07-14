@@ -1,0 +1,28 @@
+/* 52 - infrared */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #dc143c;
+    host: #b22222;
+    label: #cd5c5c;
+    value: #ffe4e1;
+    separator: #8b0000;
+    title: #dc143c;
+    logo: #b22222;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #dc143c;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

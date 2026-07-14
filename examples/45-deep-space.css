@@ -1,0 +1,28 @@
+/* 45 - deep space */
+
+:root {
+    separator: "·";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #c0d6e4;
+    host: #82aaff;
+    label: #b0c4de;
+    value: #f0f8ff;
+    separator: #4a6fa5;
+    title: #c0d6e4;
+    logo: #82aaff;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #c0d6e4;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

@@ -1,0 +1,28 @@
+/* 42 - aurora borealis */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #00e5a0;
+    host: #7b68ee;
+    label: #00bfa5;
+    value: #e0f7fa;
+    separator: #6a1b9a;
+    title: #00e5a0;
+    logo: #7b68ee;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #00e5a0;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

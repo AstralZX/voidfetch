@@ -1,0 +1,28 @@
+/* 51 - harmony green */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #3cb371;
+    host: #2e8b57;
+    label: #66cdaa;
+    value: #f0fff0;
+    separator: #228b22;
+    title: #3cb371;
+    logo: #2e8b57;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #3cb371;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

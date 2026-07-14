@@ -1,0 +1,28 @@
+/* 48 - firestorm */
+
+:root {
+    separator: "═";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #ff4500;
+    host: #ff6347;
+    label: #ff8c00;
+    value: #fff8dc;
+    separator: #dc143c;
+    title: #ff4500;
+    logo: #ff6347;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #ff4500;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

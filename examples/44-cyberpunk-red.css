@@ -1,0 +1,28 @@
+/* 44 - cyberpunk red */
+
+:root {
+    separator: "║";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #ff0033;
+    host: #cc0000;
+    label: #ff4444;
+    value: #ffffff;
+    separator: #ff0033;
+    title: #ff0033;
+    logo: #ff0033;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #ff0033;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

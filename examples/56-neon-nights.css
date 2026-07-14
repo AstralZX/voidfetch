@@ -1,0 +1,28 @@
+/* 56 - neon nights */
+
+:root {
+    separator: "║";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #ff10f0;
+    host: #00ffff;
+    label: #ff6ec7;
+    value: #ffffff;
+    separator: #ff00ff;
+    title: #ff10f0;
+    logo: #00ffff;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #ff10f0;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

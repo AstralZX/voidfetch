@@ -1,0 +1,28 @@
+/* 43 - candy pop */
+
+:root {
+    separator: "•";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #ff69b4;
+    host: #ff1493;
+    label: #da70d6;
+    value: #fffacd;
+    separator: #ff6eb4;
+    title: #ff1493;
+    logo: #ff69b4;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #ff1493;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

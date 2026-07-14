@@ -1,0 +1,28 @@
+/* 54 - lava flow */
+
+:root {
+    separator: "═";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #ff4500;
+    host: #ff6600;
+    label: #ff3300;
+    value: #fff5ee;
+    separator: #cc3300;
+    title: #ff4500;
+    logo: #ff6600;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #ff4500;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

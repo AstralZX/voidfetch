@@ -1,0 +1,28 @@
+/* 55 - midnight blues */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #1c3d5a;
+    host: #2c5f7c;
+    label: #4682b4;
+    value: #b0c4de;
+    separator: #191970;
+    title: #1c3d5a;
+    logo: #2c5f7c;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #1c3d5a;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

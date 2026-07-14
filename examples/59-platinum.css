@@ -1,0 +1,28 @@
+/* 59 - platinum */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #c0c0c0;
+    host: #a9a9a9;
+    label: #d3d3d3;
+    value: #f5f5f5;
+    separator: #808080;
+    title: #c0c0c0;
+    logo: #a9a9a9;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #c0c0c0;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

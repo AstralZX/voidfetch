@@ -2,6 +2,7 @@ use std::env;
 use std::fs;
 use std::path::Path;
 use std::process::Command;
+use std::thread;
 
 pub struct Info {
     pub username: String,
@@ -37,25 +38,49 @@ fn read_file(path: &str) -> String {
 }
 
 pub fn gather() -> Info {
+    let (os, host, kernel, uptime, packages, shell, terminal, de, wm, cpu, gpu, memory, disk, locale, battery, resolution) = thread::scope(|s| {
+        let t_os = s.spawn(|| get_os());
+        let t_host = s.spawn(|| get_host());
+        let t_kernel = s.spawn(|| get_kernel());
+        let t_uptime = s.spawn(|| get_uptime());
+        let t_packages = s.spawn(|| get_packages());
+        let t_shell = s.spawn(|| get_shell());
+        let t_terminal = s.spawn(|| get_terminal());
+        let t_de = s.spawn(|| get_de());
+        let t_wm = s.spawn(|| get_wm());
+        let t_cpu = s.spawn(|| get_cpu());
+        let t_gpu = s.spawn(|| get_gpu());
+        let t_memory = s.spawn(|| get_memory());
+        let t_disk = s.spawn(|| get_disk());
+        let t_locale = s.spawn(|| get_locale());
+        let t_battery = s.spawn(|| get_battery());
+        let t_resolution = s.spawn(|| get_resolution());
+
+        (
+            t_os.join().unwrap_or_default(),
+            t_host.join().unwrap_or_default(),
+            t_kernel.join().unwrap_or_default(),
+            t_uptime.join().unwrap_or_default(),
+            t_packages.join().unwrap_or_default(),
+            t_shell.join().unwrap_or_default(),
+            t_terminal.join().unwrap_or_default(),
+            t_de.join().unwrap_or_default(),
+            t_wm.join().unwrap_or_default(),
+            t_cpu.join().unwrap_or_default(),
+            t_gpu.join().unwrap_or_default(),
+            t_memory.join().unwrap_or_default(),
+            t_disk.join().unwrap_or_default(),
+            t_locale.join().unwrap_or_default(),
+            t_battery.join().unwrap_or_default(),
+            t_resolution.join().unwrap_or_default(),
+        )
+    });
+
     Info {
         username: get_user(),
         hostname: get_hostname(),
-        os: get_os(),
-        host: get_host(),
-        kernel: get_kernel(),
-        uptime: get_uptime(),
-        packages: get_packages(),
-        shell: get_shell(),
-        terminal: get_terminal(),
-        de: get_de(),
-        wm: get_wm(),
-        cpu: get_cpu(),
-        gpu: get_gpu(),
-        memory: get_memory(),
-        disk: get_disk(),
-        locale: get_locale(),
-        battery: get_battery(),
-        resolution: get_resolution(),
+        os, host, kernel, uptime, packages, shell, terminal,
+        de, wm, cpu, gpu, memory, disk, locale, battery, resolution,
     }
 }
 
@@ -74,8 +99,7 @@ fn get_os() -> String {
         return format!("Windows {}", run("ver"));
     }
     if cfg!(target_os = "macos") {
-        let v = run("sw_vers -productVersion");
-        return format!("macOS {}", v);
+        return format!("macOS {}", run("sw_vers -productVersion"));
     }
 
     let data = read_file("/etc/os-release");
@@ -85,9 +109,7 @@ fn get_os() -> String {
         }
     }
 
-    let sysname = run("uname -s");
-    let release = run("uname -r");
-    format!("{} {}", sysname, release)
+    format!("{} {}", run("uname -s"), run("uname -r"))
 }
 
 fn get_host() -> String {
@@ -109,7 +131,7 @@ fn get_host() -> String {
             return name.to_string();
         }
     }
-    run("cat /sys/class/dmi/id/product_name 2>/dev/null || cat /sys/class/dmi/id/board_name 2>/dev/null || echo N/A")
+    "N/A".into()
 }
 
 fn get_kernel() -> String {
@@ -120,25 +142,20 @@ fn get_uptime() -> String {
     let data = read_file("/proc/uptime");
     if let Some(first) = data.split_whitespace().next() {
         if let Ok(secs) = first.parse::<u64>() {
-            let d = secs / 86400;
-            let h = (secs % 86400) / 3600;
-            let m = (secs % 3600) / 60;
-            let mut result = String::new();
-            if d > 0 {
-                result.push_str(&format!("{}d ", d));
-            }
-            if h > 0 {
-                result.push_str(&format!("{}h ", h));
-            }
-            result.push_str(&format!("{}m", m));
-            return result;
+            let (d, rem) = (secs / 86400, secs % 86400);
+            let (h, m) = (rem / 3600, (rem % 3600) / 60);
+            let mut parts = Vec::with_capacity(3);
+            if d > 0 { parts.push(format!("{}d", d)); }
+            if h > 0 { parts.push(format!("{}h", h)); }
+            parts.push(format!("{}m", m));
+            return parts.join(" ");
         }
     }
     run("uptime -p").trim_start_matches("up ").to_string()
 }
 
 fn get_packages() -> String {
-    let mut counts: Vec<String> = Vec::new();
+    let mut counts: Vec<String> = Vec::with_capacity(4);
 
     let check = |cmd: &str, name: &str| -> Option<String> {
         let out = run(cmd);
@@ -153,11 +170,10 @@ fn get_packages() -> String {
     if let Some(p) = check("pacman -Q 2>/dev/null | wc -l", "pacman") { counts.push(p); }
     if let Some(p) = check("dpkg -l 2>/dev/null | grep -c '^ii'", "dpkg") { counts.push(p); }
     if let Some(p) = check("rpm -qa 2>/dev/null | wc -l", "rpm") { counts.push(p); }
-    if let Some(p) = check("apk info 2>/dev/null | wc -l", "apk") { counts.push(p); }
     if let Some(p) = check("xbps-query -l 2>/dev/null | wc -l", "xbps") { counts.push(p); }
-    if let Some(p) = check("snap list 2>/dev/null | tail -n +2 | wc -l", "snap") { counts.push(p); }
     if let Some(p) = check("flatpak list 2>/dev/null | wc -l", "flatpak") { counts.push(p); }
-    if let Some(p) = check("emerge -e N 2>/dev/null | wc -l", "portage") { counts.push(p); }
+    if let Some(p) = check("snap list 2>/dev/null | tail -n +2 | wc -l", "snap") { counts.push(p); }
+    if let Some(p) = check("apk info 2>/dev/null | wc -l", "apk") { counts.push(p); }
 
     if counts.is_empty() { "N/A".into() } else { counts.join(", ") }
 }
@@ -173,29 +189,22 @@ fn get_shell() -> String {
 }
 
 fn get_terminal() -> String {
-    if let Ok(v) = env::var("WT_SESSION") {
-        if !v.is_empty() { return "Windows Terminal".into(); }
+    for var in &["WT_SESSION", "TERM_PROGRAM", "TERM", "COLORTERM"] {
+        if let Ok(v) = env::var(var) {
+            if !v.is_empty() { return v; }
+        }
     }
-    if let Ok(v) = env::var("TERM_PROGRAM") {
-        if !v.is_empty() { return v; }
-    }
-    if let Ok(v) = env::var("TERM") {
-        if !v.is_empty() { return v; }
-    }
-    env::var("COLORTERM").unwrap_or_else(|_| "N/A".into())
+    "N/A".into()
 }
 
 fn get_de() -> String {
-    if let Ok(v) = env::var("XDG_CURRENT_DESKTOP") {
-        if !v.is_empty() { return v; }
+    for var in &["XDG_CURRENT_DESKTOP", "DESKTOP_SESSION", "GDMSESSION"] {
+        if let Ok(v) = env::var(var) {
+            if !v.is_empty() { return v; }
+        }
     }
-    if let Ok(v) = env::var("DESKTOP_SESSION") {
-        if !v.is_empty() { return v; }
-    }
-    if let Ok(v) = env::var("GDMSESSION") {
-        if !v.is_empty() { return v; }
-    }
-    run("basename \"$(ps -o comm= -p $(ps -o ppid= -p $(ps -o ppid= -p $$)))\" 2>/dev/null || echo N/A")
+    let result = run("basename \"$(ps -o comm= -p $(ps -o ppid= -p $(ps -o ppid= -p $$)))\" 2>/dev/null");
+    if result.is_empty() { "N/A".into() } else { result }
 }
 
 fn get_wm() -> String {
@@ -211,7 +220,7 @@ fn get_wm() -> String {
     if !wmctrl.is_empty() && wmctrl != "N/A" {
         return wmctrl;
     }
-    run("xprop -root _NET_WM_NAME 2>/dev/null | cut -d'\"' -f2 || echo N/A")
+    run("xprop -root _NET_WM_NAME 2>/dev/null | cut -d'\"' -f2")
 }
 
 fn get_cpu() -> String {
@@ -227,7 +236,7 @@ fn get_cpu() -> String {
             }
         }
     }
-    run("sysctl -n machdep.cpu.brand_string 2>/dev/null || echo N/A")
+    run("sysctl -n machdep.cpu.brand_string 2>/dev/null")
 }
 
 fn get_gpu() -> String {
@@ -237,11 +246,7 @@ fn get_gpu() -> String {
             return gpu.to_string();
         }
     }
-    let sysgpu = run("lspci -nn 2>/dev/null | grep -i 'vga\\|3d' | head -1 | sed 's/.*: //'");
-    if !sysgpu.is_empty() && sysgpu != "N/A" {
-        return sysgpu;
-    }
-    run("system_profiler SPDisplaysDataType 2>/dev/null | grep 'Chipset Model' | head -1 | awk -F': ' '{print $2}'")
+    "N/A".into()
 }
 
 fn get_memory() -> String {
@@ -263,8 +268,7 @@ fn get_memory() -> String {
     }
 
     if total > 0 {
-        let used = total - avail;
-        return format!("{}MB / {}MB", used / 1024, total / 1024);
+        return format!("{}MB / {}MB", (total - avail) / 1024, total / 1024);
     }
 
     let memsize = run("sysctl -n hw.memsize 2>/dev/null");
@@ -291,44 +295,29 @@ fn get_locale() -> String {
 }
 
 fn get_battery() -> String {
-    let bat_path = "/sys/class/power_supply/BAT0";
-    if Path::new(bat_path).exists() {
-        let capacity = fs::read_to_string(format!("{}/capacity", bat_path))
-            .map(|s| s.trim().to_string())
-            .unwrap_or_default();
-        let status = fs::read_to_string(format!("{}/status", bat_path))
-            .map(|s| s.trim().to_string())
-            .unwrap_or_default();
-        if !capacity.is_empty() {
-            return format!("{}% [{}]", capacity, status);
-        }
-    }
-
-    let bat_path = "/sys/class/power_supply/BAT1";
-    if Path::new(bat_path).exists() {
-        let capacity = fs::read_to_string(format!("{}/capacity", bat_path))
-            .map(|s| s.trim().to_string())
-            .unwrap_or_default();
-        let status = fs::read_to_string(format!("{}/status", bat_path))
-            .map(|s| s.trim().to_string())
-            .unwrap_or_default();
-        if !capacity.is_empty() {
-            return format!("{}% [{}]", capacity, status);
+    for bat in &["BAT0", "BAT1", "BATT"] {
+        let bat_path = format!("/sys/class/power_supply/{}", bat);
+        if Path::new(&bat_path).exists() {
+            let capacity = fs::read_to_string(format!("{}/capacity", bat_path))
+                .map(|s| s.trim().to_string())
+                .unwrap_or_default();
+            let status = fs::read_to_string(format!("{}/status", bat_path))
+                .map(|s| s.trim().to_string())
+                .unwrap_or_default();
+            if !capacity.is_empty() {
+                return format!("{}% [{}]", capacity, status);
+            }
         }
     }
 
     let out = run("pmset -g batt 2>/dev/null | grep -o '\\d\\+%' | head -1");
-    if !out.is_empty() && out != "N/A" {
-        return out;
-    }
+    if !out.is_empty() { return out; }
 
     "N/A".into()
 }
 
 fn get_resolution() -> String {
     let out = run("xrandr 2>/dev/null | grep ' connected' | grep -oP '\\d+x\\d+' | head -1");
-    if !out.is_empty() && out != "N/A" {
-        return out;
-    }
+    if !out.is_empty() { return out; }
     run("system_profiler SPDisplaysDataType 2>/dev/null | grep Resolution | head -1 | awk -F': ' '{print $2}'")
 }

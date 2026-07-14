@@ -1,0 +1,28 @@
+/* 47 - electric blue */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #00bfff;
+    host: #1e90ff;
+    label: #00ced1;
+    value: #f0f8ff;
+    separator: #4169e1;
+    title: #00bfff;
+    logo: #1e90ff;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #00bfff;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

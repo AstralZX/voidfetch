@@ -1,0 +1,28 @@
+/* 61 - tundra */
+
+:root {
+    separator: "·";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #6fa3ef;
+    host: #a8c8e8;
+    label: #87ceeb;
+    value: #f0f8ff;
+    separator: #708090;
+    title: #6fa3ef;
+    logo: #a8c8e8;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #6fa3ef;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

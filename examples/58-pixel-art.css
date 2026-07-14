@@ -1,0 +1,28 @@
+/* 58 - pixel art */
+
+:root {
+    separator: "█";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #ff004d;
+    host: #00e436;
+    label: #ffec27;
+    value: #fff1e8;
+    separator: #29adff;
+    title: #ff004d;
+    logo: #00e436;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #ff004d;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

@@ -1,0 +1,28 @@
+/* 50 - gothic dark */
+
+:root {
+    separator: "╬";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #9932cc;
+    host: #8b0000;
+    label: #6a0dad;
+    value: #dcdcdc;
+    separator: #4b0082;
+    title: #9932cc;
+    logo: #8b0000;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #9932cc;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

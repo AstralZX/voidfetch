@@ -1,0 +1,28 @@
+/* 49 - glass morphism */
+
+:root {
+    separator: "─";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #a8d8ea;
+    host: #aa96da;
+    label: #c4b7d5;
+    value: #f5f5f5;
+    separator: #b8c6db;
+    title: #a8d8ea;
+    logo: #aa96da;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #a8d8ea;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}

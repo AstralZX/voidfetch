@@ -1,0 +1,28 @@
+/* 53 - jade forest */
+
+:root {
+    separator: "·";
+    padding: 2;
+    bold: true;
+}
+
+@colors {
+    user: #00a86b;
+    host: #006d5b;
+    label: #2e8b57;
+    value: #f0fff0;
+    separator: #004d40;
+    title: #00a86b;
+    logo: #006d5b;
+}
+
+@logo {
+    enabled: true;
+    distro: auto;
+    color: #00a86b;
+}
+
+@title {
+    enabled: true;
+    format: "{user}@{host}";
+}
