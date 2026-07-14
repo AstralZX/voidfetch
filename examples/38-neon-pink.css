@@ -1,51 +1,33 @@
-/* 38 - neon pink */
+@reset;
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
+@theme vaporwave;
+@style rainbow;
+@separator " ► ";
+@margin 2;
+@italic true;
+@glow true;
+@underline true;
 
-@colors {
-    user: #ff0080;
-    host: #ff00ff;
-    label: #ff1493;
-    value: #ffffff;
-    separator: #800040;
-    title: #ff0080;
-    logo: #ff0080;
-}
+@title { enabled: true; format: "★ {user} ★ {host} ★"; }
+@logo { enabled: false; }
 
 @info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: true;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #ff0080;
-}
-
-@title {
-    enabled: true;
-    format: "{user}@{host}";
-}
-
-@labels {
-    capitalize: true;
-}
+custom: "▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪";

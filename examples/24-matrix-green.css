@@ -1,57 +1,58 @@
-/* 24 - matrix green */
+@theme matrix;
+@style hacker;
+@palette dracula;
+@separator " > ";
+@margin 1;
+@opacity medium;
+@bold true;
+@italic false;
+@underline false;
+@glow true;
+@font "VT323";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #00ff00;
-    host: #00cc00;
-    label: #00ff00;
-    value: #009900;
-    separator: #003300;
-    title: #00ff00;
-    logo: #00ff00;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: green;
+  host: green;
+  label: green;
+  value: green;
+  separator: green;
+  title: green;
+  logo: green;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #00ff00;
+  enabled: true;
+  distro: auto;
+  color: green;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+custom: "[ ENTER THE MATRIX ]";
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    uppercase: true;
-}
-
-@custom {
-    line: "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓";
-    line: "  wake up, neo...";
-    line: "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓";
+  capitalize: false;
+  uppercase: true;
 }

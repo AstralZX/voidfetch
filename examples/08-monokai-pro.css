@@ -1,51 +1,55 @@
-/* 08 - monokai pro */
+@theme monokai;
+@style compact;
+@palette mono;
+@separator " → ";
+@margin 2;
+@opacity high;
+@italic false;
+@underline false;
+@glow false;
+@font "Source Code Pro";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #fc9867;
-    host: #a9dc76;
-    label: #78dce8;
-    value: #fcfcfa;
-    separator: #5a5475;
-    title: #fc9867;
-    logo: #fc9867;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: yellow;
+  host: green;
+  label: comment;
+  value: foreground;
+  separator: dark2;
+  title: pink;
+  logo: orange;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #fc9867;
+  enabled: true;
+  distro: auto;
+  color: orange;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "⟨ {user} ⸱ {host} ⟩";
+}
+
+@info {
+  os: true;
+  host: false;
+  kernel: false;
+  uptime: true;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: false;
 }

@@ -1,28 +1,39 @@
-/* 60 - strawberry */
+/* voidfetch config - strawberry */
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #fc5185;
-    host: #ff6b6b;
-    label: #ff8e8e;
-    value: #fff5f5;
-    separator: #c0392b;
-    title: #fc5185;
-    logo: #ff6b6b;
-}
-
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #fc5185;
-}
+@theme rosepine
+@style fancy
+@separator " ❀ "
+@margin 2
+@italic true
+@glow true
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "♡ {user} ∙ {host} ♡";
 }
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
+}
+
+@labels {
+  capitalize: true;
+  uppercase: false;
+}
+
+custom: "♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡";

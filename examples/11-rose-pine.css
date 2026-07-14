@@ -1,51 +1,55 @@
-/* 11 - rose pine */
+@theme rosepine;
+@style fancy;
+@palette pastel;
+@separator " ꝏ ";
+@margin 3;
+@opacity high;
+@italic true;
+@underline false;
+@glow false;
+@font "Victor Mono";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #ebbcba;
-    host: #c4a7e7;
-    label: #eb6f92;
-    value: #e0def4;
-    separator: #31748f;
-    title: #ebbcba;
-    logo: #ebbcba;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: gold;
+  host: rose;
+  label: muted;
+  value: text;
+  separator: subtle;
+  title: pine;
+  logo: love;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #ebbcba;
+  enabled: true;
+  distro: auto;
+  color: love;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: false;
+  kernel: false;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: false;
+  de: false;
+  wm: true;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: false;
 }

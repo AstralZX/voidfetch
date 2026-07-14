@@ -1,57 +1,33 @@
-/* 40 - solar flare */
+@reset;
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
+@theme solarized;
+@style full;
+@separator " ‖ ";
+@margin 2;
+@italic false;
+@bold true;
+@glow true;
 
-@colors {
-    user: #ff6600;
-    host: #ff3300;
-    label: #ff9900;
-    value: #fff5e6;
-    separator: #663300;
-    title: #ff6600;
-    logo: #ff6600;
-}
+@title { enabled: true; format: "⟨⟨ {user} ∥ {host} ⟩⟩"; }
+@logo { enabled: false; }
 
 @info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: true;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: true;
+  resolution: true;
 }
 
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #ff6600;
-}
-
-@title {
-    enabled: true;
-    format: "{user}@{host}";
-}
-
-@labels {
-    capitalize: true;
-}
-
-@custom {
-    line: "☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀";
-    line: "  too hot to handle";
-    line: "☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀☀";
-}
+@labels { uppercase: true; }

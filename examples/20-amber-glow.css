@@ -1,51 +1,58 @@
-/* 20 - amber glow */
+@theme amber;
+@style full;
+@palette solarized;
+@separator " ▸ ";
+@margin 1;
+@opacity medium;
+@bold true;
+@italic false;
+@underline false;
+@glow true;
+@font "Fira Code";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #ffb347;
-    host: #ffcc33;
-    label: #ff9500;
-    value: #fff5e1;
-    separator: #665500;
-    title: #ffb347;
-    logo: #ffb347;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: yellow;
+  host: yellow;
+  label: yellow;
+  value: yellow;
+  separator: yellow;
+  title: yellow;
+  logo: yellow;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #ffb347;
+  enabled: true;
+  distro: auto;
+  color: yellow;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+custom: "░▒▓█ SYSTEM INFO █▓▒░";
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: true;
+  de: true;
+  wm: true;
+  cpu: true;
+  gpu: true;
+  memory: true;
+  disk: true;
+  locale: true;
+  battery: true;
+  resolution: true;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: false;
 }

@@ -1,51 +1,33 @@
-/* 31 - monochrome */
+@reset;
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
+@style minimal;
+@separator " = ";
+@margin 1;
+@opacity low;
+@italic false;
 
-@colors {
-    user: #ffffff;
-    host: #cccccc;
-    label: #999999;
-    value: #ffffff;
-    separator: #444444;
-    title: #ffffff;
-    logo: #ffffff;
-}
+@title { enabled: false; }
+@logo { enabled: false; }
 
 @info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #ffffff;
-}
+@labels { uppercase: false; }
 
-@title {
-    enabled: true;
-    format: "{user}@{host}";
-}
-
-@labels {
-    capitalize: true;
-}
+custom: "----------------------------";

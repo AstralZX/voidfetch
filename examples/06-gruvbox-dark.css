@@ -1,51 +1,55 @@
-/* 06 - gruvbox dark */
+@theme gruvbox;
+@style compact;
+@palette gruvbox;
+@separator "::";
+@margin 1;
+@opacity high;
+@italic false;
+@underline false;
+@glow false;
+@font "Iosevka";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #fabd2f;
-    host: #fe8019;
-    label: #b8bb26;
-    value: #ebdbb2;
-    separator: #665c54;
-    title: #fabd2f;
-    logo: #fabd2f;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: orange;
+  host: yellow;
+  label: fg3;
+  value: fg1;
+  separator: bg3;
+  title: orange;
+  logo: orange;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #fabd2f;
+  enabled: true;
+  distro: auto;
+  color: orange;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: false;
+  packages: true;
+  shell: true;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: true;
 }

@@ -1,52 +1,55 @@
-/* 02 - sunset fire */
+@theme sunset;
+@style fancy;
+@palette gruvbox;
+@separator "▸";
+@margin 1;
+@opacity high;
+@italic false;
+@underline false;
+@glow true;
+@font "JetBrains Mono";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #ff6b6b;
-    host: #ffa502;
-    label: #ff6b6b;
-    value: #ffeaa7;
-    separator: #636e72;
-    title: #ff6b6b;
-    logo: auto;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: true;
-    resolution: true;
+@color {
+  user: red;
+  host: yellow;
+  label: white;
+  value: orange;
+  separator: red;
+  title: yellow;
+  logo: red;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #ff6b6b;
+  enabled: true;
+  distro: auto;
+  color: orange;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "╔═ {user} @ {host} ═╗";
+}
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: true;
+  de: true;
+  wm: true;
+  cpu: true;
+  gpu: true;
+  memory: true;
+  disk: true;
+  locale: true;
+  battery: true;
+  resolution: true;
 }
 
 @labels {
-    capitalize: true;
-    uppercase: false;
+  capitalize: false;
+  uppercase: true;
 }

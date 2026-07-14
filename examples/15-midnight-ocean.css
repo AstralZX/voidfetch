@@ -1,57 +1,55 @@
-/* 15 - midnight ocean */
+@theme ocean;
+@style fancy;
+@palette catppuccin;
+@separator " ≡ ";
+@margin 3;
+@opacity high;
+@italic false;
+@underline true;
+@glow true;
+@font "Pragmata Pro";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #00b4d8;
-    host: #0077b6;
-    label: #48cae4;
-    value: #caf0f8;
-    separator: #023e8a;
-    title: #00b4d8;
-    logo: #0077b6;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: blue;
+  host: teal;
+  label: overlay0;
+  value: text;
+  separator: blue;
+  title: blue;
+  logo: teal;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #00b4d8;
+  enabled: true;
+  distro: auto;
+  color: teal;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "⟪ {user} ∙ {host} ⟫";
+}
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: true;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: true;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
-}
-
-@custom {
-    line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    line: "  deep blue vibes";
-    line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+  capitalize: true;
+  uppercase: false;
 }

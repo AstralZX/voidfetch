@@ -1,51 +1,56 @@
-/* 30 - solarized light */
+@theme solarized;
+@style clean;
+@palette solarized;
+@separator " : ";
+@margin 1;
+@opacity medium;
+@bold false;
+@italic false;
+@underline false;
+@glow false;
+@font "Fira Code";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #268bd2;
-    host: #6c71c4;
-    label: #2aa198;
-    value: #657b83;
-    separator: #93a1a1;
-    title: #268bd2;
-    logo: #268bd2;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: white;
+  host: white;
+  label: white;
+  value: white;
+  separator: white;
+  title: white;
+  logo: white;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #268bd2;
+  enabled: true;
+  distro: auto;
+  color: white;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: false;
+  packages: true;
+  shell: true;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: false;
+  uppercase: true;
 }

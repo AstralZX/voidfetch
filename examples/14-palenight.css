@@ -1,51 +1,57 @@
-/* 14 - palenight */
+@theme palenight;
+@style clean;
+@palette tokyo;
+@separator " ┆ ";
+@margin 2;
+@opacity medium;
+@italic true;
+@underline false;
+@glow false;
+@font "Dank Mono";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #82aaff;
-    host: #c792ea;
-    label: #89ddff;
-    value: #a6accd;
-    separator: #2e3440;
-    title: #82aaff;
-    logo: #c792ea;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: blue;
+  host: teal;
+  label: comment;
+  value: foreground;
+  separator: surface;
+  title: blue;
+  logo: purple;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #c792ea;
+  enabled: true;
+  distro: auto;
+  color: purple;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: true;
+  wm: true;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: false;
 }
+
+custom: "░░░░░░░░░░░░░░░░░░░░";

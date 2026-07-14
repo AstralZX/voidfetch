@@ -1,28 +1,39 @@
-/* 53 - jade forest */
+/* voidfetch config - jade-forest */
 
-:root {
-    separator: "·";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #00a86b;
-    host: #006d5b;
-    label: #2e8b57;
-    value: #f0fff0;
-    separator: #004d40;
-    title: #00a86b;
-    logo: #006d5b;
-}
-
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #00a86b;
-}
+@theme forest
+@style clean
+@separator " ❖ "
+@margin 3
+@italic true
+@underline true
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "❖ {user} · {host} ❖";
 }
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: true;
+  wm: true;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
+}
+
+@labels {
+  capitalize: true;
+  uppercase: false;
+}
+
+custom: "❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖";

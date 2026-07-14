@@ -1,28 +1,39 @@
-/* 47 - electric blue */
+/* voidfetch config - electric-blue */
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #00bfff;
-    host: #1e90ff;
-    label: #00ced1;
-    value: #f0f8ff;
-    separator: #4169e1;
-    title: #00bfff;
-    logo: #1e90ff;
-}
-
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #00bfff;
-}
+@theme arctic
+@style full
+@separator " ▐ "
+@margin 2
+@opacity high
+@italic false
+@underline true
+@glow true
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "⚡ {user} ⚡ {host} ⚡";
+}
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: true;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
+}
+
+@labels {
+  capitalize: false;
+  uppercase: true;
 }

@@ -1,51 +1,58 @@
-/* 10 - one dark */
+@theme onedark;
+@style full;
+@palette gruvbox;
+@separator " ║ ";
+@margin 2;
+@opacity high;
+@italic false;
+@underline true;
+@glow true;
+@font "Roboto Mono";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #61afef;
-    host: #c678dd;
-    label: #56b6c2;
-    value: #abb2bf;
-    separator: #3e4451;
-    title: #61afef;
-    logo: #61afef;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: purple;
+  host: cyan;
+  label: grey;
+  value: white;
+  separator: grey;
+  title: purple;
+  logo: purple;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #61afef;
+  enabled: true;
+  distro: auto;
+  color: purple;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: true;
+  de: true;
+  wm: true;
+  cpu: true;
+  gpu: true;
+  memory: true;
+  disk: true;
+  locale: true;
+  battery: true;
+  resolution: true;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: false;
 }
+
+custom: "┌─────────────────────┐";
+custom: "└─────────────────────┘";

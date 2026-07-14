@@ -1,51 +1,55 @@
-/* 23 - ice blue minimal */
+@theme ice;
+@style minimal;
+@palette nord;
+@separator " - ";
+@margin 0;
+@opacity low;
+@bold false;
+@italic false;
+@underline false;
+@glow false;
+@font "monospace";
 
-:root {
-    separator: " ";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #74b9ff;
-    host: #0984e3;
-    label: #a29bfe;
-    value: #dfe6e9;
-    separator: #636e72;
-    title: #74b9ff;
-    logo: #74b9ff;
-}
-
-@info {
-    os: true;
-    host: false;
-    kernel: true;
-    uptime: true;
-    packages: false;
-    shell: true;
-    terminal: false;
-    de: false;
-    wm: true;
-    cpu: true;
-    gpu: false;
-    memory: true;
-    disk: false;
-    locale: false;
-    battery: false;
-    resolution: true;
+@color {
+  user: white;
+  host: white;
+  label: white;
+  value: white;
+  separator: white;
+  title: white;
+  logo: white;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #74b9ff;
+  enabled: false;
+  distro: auto;
+  color: white;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: false;
+}
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: false;
+  uppercase: false;
 }

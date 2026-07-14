@@ -1,51 +1,56 @@
-/* 17 - cherry blossom */
+@theme sakura;
+@style fancy;
+@palette pastel;
+@separator " ❀ ";
+@margin 3;
+@opacity medium;
+@bold false;
+@italic true;
+@underline false;
+@glow true;
+@font "Quicksand";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #f38ba8;
-    host: #eba0ac;
-    label: #fab387;
-    value: #f5e0dc;
-    separator: #585b70;
-    title: #f38ba8;
-    logo: #f38ba8;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: pink;
+  host: pink;
+  label: pink;
+  value: pink;
+  separator: pink;
+  title: pink;
+  logo: pink;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #f38ba8;
+  enabled: true;
+  distro: auto;
+  color: pink;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "✿ {user} ✿ {host} ✿";
+}
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: false;
+  uppercase: false;
 }

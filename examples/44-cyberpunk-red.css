@@ -1,28 +1,36 @@
-/* 44 - cyberpunk red */
+@reset;
 
-:root {
-    separator: "║";
-    padding: 2;
-    bold: true;
+@theme blood;
+@style hacker;
+@separator " ▸ ";
+@margin 1;
+@italic false;
+@bold true;
+@underline true;
+@glow true;
+
+@title { enabled: true; format: ">> {user}@{host} <<"; }
+@logo { enabled: false; }
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: true;
+  cpu: true;
+  gpu: true;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
-@colors {
-    user: #ff0033;
-    host: #cc0000;
-    label: #ff4444;
-    value: #ffffff;
-    separator: #ff0033;
-    title: #ff0033;
-    logo: #ff0033;
-}
+@labels { uppercase: true; }
 
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #ff0033;
-}
-
-@title {
-    enabled: true;
-    format: "{user}@{host}";
-}
+custom: "▓▒░ REDHACK ░▒▓";

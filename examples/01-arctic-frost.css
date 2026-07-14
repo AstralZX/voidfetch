@@ -1,52 +1,55 @@
-/* 01 - arctic frost */
+@theme arctic;
+@style minimal;
+@palette nord;
+@separator "─";
+@margin 2;
+@opacity high;
+@italic false;
+@underline false;
+@glow false;
+@font "Fira Code";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #88c0d0;
-    host: #81a1c1;
-    label: #88c0d0;
-    value: #eceff4;
-    separator: #4c566a;
-    title: #88c0d0;
-    logo: auto;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: blue;
+  host: cyan;
+  label: white;
+  value: cyan;
+  separator: white;
+  title: cyan;
+  logo: blue;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #88c0d0;
+  enabled: true;
+  distro: auto;
+  color: cyan;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: true;
+  de: true;
+  wm: true;
+  cpu: true;
+  gpu: true;
+  memory: true;
+  disk: true;
+  locale: true;
+  battery: true;
+  resolution: true;
 }
 
 @labels {
-    capitalize: true;
-    uppercase: false;
+  capitalize: true;
+  uppercase: false;
 }

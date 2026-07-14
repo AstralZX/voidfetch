@@ -1,51 +1,56 @@
-/* 21 - emerald sea */
+@theme emerald;
+@style compact;
+@palette catppuccin;
+@separator " ≈ ";
+@margin 2;
+@opacity medium;
+@bold false;
+@italic false;
+@underline true;
+@glow false;
+@font "Iosevka";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #2ecc71;
-    host: #27ae60;
-    label: #1abc9c;
-    value: #ecf0f1;
-    separator: #2c3e50;
-    title: #2ecc71;
-    logo: #2ecc71;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: green;
+  host: green;
+  label: green;
+  value: green;
+  separator: green;
+  title: green;
+  logo: green;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #2ecc71;
+  enabled: true;
+  distro: auto;
+  color: green;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: false;
+  uppercase: false;
 }

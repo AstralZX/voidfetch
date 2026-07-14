@@ -1,51 +1,57 @@
-/* 07 - catppuccin mocha */
+@theme catppuccin;
+@style rainbow;
+@palette catppuccin;
+@separator "│";
+@margin 3;
+@opacity high;
+@italic true;
+@underline false;
+@glow false;
+@font "Maple Mono";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #cba6f7;
-    host: #f5c2e7;
-    label: #89dceb;
-    value: #cdd6f4;
-    separator: #585b70;
-    title: #cba6f7;
-    logo: #cba6f7;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: mauve;
+  host: blue;
+  label: overlay2;
+  value: text;
+  separator: surface2;
+  title: pink;
+  logo: pink;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #cba6f7;
+  enabled: true;
+  distro: auto;
+  color: pink;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: true;
+  de: true;
+  wm: true;
+  cpu: true;
+  gpu: true;
+  memory: true;
+  disk: true;
+  locale: true;
+  battery: true;
+  resolution: true;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: false;
 }
+
+custom: "─── system info ───";

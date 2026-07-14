@@ -1,28 +1,37 @@
-/* 55 - midnight blues */
+/* voidfetch config - midnight-blues */
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #1c3d5a;
-    host: #2c5f7c;
-    label: #4682b4;
-    value: #b0c4de;
-    separator: #191970;
-    title: #1c3d5a;
-    logo: #2c5f7c;
-}
-
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #1c3d5a;
-}
+@theme nord
+@style clean
+@separator " : "
+@margin 2
+@italic true
+@opacity low
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
+}
+
+@labels {
+  capitalize: false;
+  uppercase: false;
 }

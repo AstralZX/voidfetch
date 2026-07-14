@@ -1,28 +1,39 @@
-/* 49 - glass morphism */
+/* voidfetch config - glass-morphism */
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #a8d8ea;
-    host: #aa96da;
-    label: #c4b7d5;
-    value: #f5f5f5;
-    separator: #b8c6db;
-    title: #a8d8ea;
-    logo: #aa96da;
-}
-
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #a8d8ea;
-}
+@theme arctic
+@style minimal
+@separator " ┊ "
+@margin 3
+@italic true
+@opacity low
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user} ◇ {host}";
 }
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
+}
+
+@labels {
+  capitalize: true;
+  uppercase: false;
+}
+
+custom: "◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇";

@@ -1,28 +1,43 @@
-/* 54 - lava flow */
+/* voidfetch config - lava-flow */
 
-:root {
-    separator: "═";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #ff4500;
-    host: #ff6600;
-    label: #ff3300;
-    value: #fff5ee;
-    separator: #cc3300;
-    title: #ff4500;
-    logo: #ff6600;
-}
-
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #ff4500;
-}
+@theme sunset
+@style full
+@separator " ║ "
+@margin 2
+@italic false
+@bold true
+@glow true
+@underline true
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "╔═{user}═╗";
 }
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: true;
+  de: true;
+  wm: true;
+  cpu: true;
+  gpu: true;
+  memory: true;
+  disk: true;
+  locale: true;
+  battery: true;
+  resolution: true;
+}
+
+@labels {
+  capitalize: true;
+  uppercase: false;
+}
+
+custom: "╔════════════════════════╗";
+custom: "╠════════════════════════╣";
+custom: "╚════════════════════════╝";

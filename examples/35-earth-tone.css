@@ -1,51 +1,32 @@
-/* 35 - earth tone */
+@reset;
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
+@theme gruvbox;
+@style clean;
+@separator " • ";
+@margin 2;
+@opacity low;
+@italic true;
 
-@colors {
-    user: #d4a574;
-    host: #8b7355;
-    label: #a0522d;
-    value: #faebd7;
-    separator: #3e2723;
-    title: #d4a574;
-    logo: #d4a574;
-}
+@title { enabled: false; }
+@logo { enabled: false; }
 
 @info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #d4a574;
-}
-
-@title {
-    enabled: true;
-    format: "{user}@{host}";
-}
-
-@labels {
-    capitalize: true;
-}
+@labels { uppercase: false; }

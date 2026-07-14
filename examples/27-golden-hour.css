@@ -1,51 +1,56 @@
-/* 27 - golden hour */
+@theme golden;
+@style fancy;
+@palette solarized;
+@separator " ◈ ";
+@margin 2;
+@opacity medium;
+@bold false;
+@italic true;
+@underline false;
+@glow true;
+@font "Cascadia Code";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #f4a261;
-    host: #e76f51;
-    label: #e9c46a;
-    value: #fefae0;
-    separator: #264653;
-    title: #f4a261;
-    logo: #e76f51;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: yellow;
+  host: yellow;
+  label: yellow;
+  value: yellow;
+  separator: yellow;
+  title: yellow;
+  logo: yellow;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #e76f51;
+  enabled: true;
+  distro: auto;
+  color: yellow;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "✧ {user} · {host} ✧";
+}
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: false;
 }

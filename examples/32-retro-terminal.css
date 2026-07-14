@@ -1,57 +1,33 @@
-/* 32 - retro terminal */
+@reset;
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
+@style retro;
+@separator " - ";
+@margin 0;
+@opacity high;
+@italic false;
 
-@colors {
-    user: #33ff00;
-    host: #33ff00;
-    label: #33ff00;
-    value: #33ff00;
-    separator: #1a8000;
-    title: #33ff00;
-    logo: #33ff00;
-}
+@title { enabled: true; format: "C:\\{user}>{host}"; }
+@logo { enabled: true; distro: windows; color: white; }
 
 @info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #33ff00;
-}
+@labels { uppercase: true; }
 
-@title {
-    enabled: true;
-    format: "{user}@{host}";
-}
-
-@labels {
-    uppercase: true;
-}
-
-@custom {
-    line: "================================";
-    line: "  system ready_";
-    line: "================================";
-}
+custom: "[ SYSTEM BOOT v2.0 ]";

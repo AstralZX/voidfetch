@@ -1,57 +1,58 @@
-/* 29 - vaporwave */
+@theme vaporwave;
+@style retro;
+@palette rainbow;
+@separator " ꞏ ";
+@margin 4;
+@opacity medium;
+@bold true;
+@italic true;
+@underline false;
+@glow true;
+@font "Press Start 2P";
 
-:root {
-    separator: "═";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #ff71ce;
-    host: #01cdfe;
-    label: #05ffa1;
-    value: #b967ff;
-    separator: #fffb96;
-    title: #ff71ce;
-    logo: #ff71ce;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: magenta;
+  host: cyan;
+  label: magenta;
+  value: cyan;
+  separator: magenta;
+  title: magenta;
+  logo: magenta;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #ff71ce;
+  enabled: true;
+  distro: auto;
+  color: cyan;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: " ▲ A E S T H E T I C ▲ ";
+}
+
+custom: "░░░░░░░░░░░░░░░░░░░░░░░░";
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: true;
+  wm: true;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    uppercase: true;
-}
-
-@custom {
-    line: "══════════════════════════════════";
-    line: "  ▓▒░ vaporwave ░▒▓";
-    line: "══════════════════════════════════";
+  capitalize: false;
+  uppercase: false;
 }

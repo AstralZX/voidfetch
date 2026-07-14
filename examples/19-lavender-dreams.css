@@ -1,51 +1,56 @@
-/* 19 - lavender dreams */
+@theme lavender;
+@style clean;
+@palette pastel;
+@separator " ∿ ";
+@margin 3;
+@opacity low;
+@bold false;
+@italic true;
+@underline false;
+@glow false;
+@font "Cascadia Code";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #b4befe;
-    host: #cba6f7;
-    label: #b4befe;
-    value: #cdd6f4;
-    separator: #585b70;
-    title: #b4befe;
-    logo: #b4befe;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: purple;
+  host: purple;
+  label: purple;
+  value: purple;
+  separator: purple;
+  title: purple;
+  logo: purple;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #b4befe;
+  enabled: true;
+  distro: auto;
+  color: purple;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user}@{host}";
+}
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: true;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: false;
+  uppercase: false;
 }

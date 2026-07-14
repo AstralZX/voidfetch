@@ -1,51 +1,32 @@
-/* 39 - abyssal deep */
+@reset;
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
+@theme abyss;
+@style minimal;
+@separator " ⋮ ";
+@margin 4;
+@opacity low;
+@italic true;
 
-@colors {
-    user: #001f3f;
-    host: #003366;
-    label: #004080;
-    value: #e6f2ff;
-    separator: #001a33;
-    title: #0066cc;
-    logo: #0066cc;
-}
+@title { enabled: false; }
+@logo { enabled: true; distro: auto; }
 
 @info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: true;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #0066cc;
-}
-
-@title {
-    enabled: true;
-    format: "{user}@{host}";
-}
-
-@labels {
-    capitalize: true;
-}
+custom: "~~~~~~~~~~~~~~~~~~~~~~~~~";

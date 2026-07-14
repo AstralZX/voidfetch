@@ -1,28 +1,39 @@
-/* 48 - firestorm */
+/* voidfetch config - firestorm */
 
-:root {
-    separator: "═";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #ff4500;
-    host: #ff6347;
-    label: #ff8c00;
-    value: #fff8dc;
-    separator: #dc143c;
-    title: #ff4500;
-    logo: #ff6347;
-}
-
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #ff4500;
-}
+@theme sunset
+@style full
+@separator " ╻ "
+@margin 1
+@italic false
+@bold true
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "🔥 {user}@{host}";
 }
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: false;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: true;
+  resolution: false;
+}
+
+@labels {
+  capitalize: false;
+  uppercase: true;
+}
+
+custom: "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓";

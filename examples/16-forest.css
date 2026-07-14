@@ -1,51 +1,58 @@
-/* 16 - forest */
+@theme forest;
+@style full;
+@palette catppuccin;
+@separator " ┊ ";
+@margin 2;
+@opacity medium;
+@bold true;
+@italic false;
+@underline false;
+@glow false;
+@font "Fira Code";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #a3be8c;
-    host: #ebcb8b;
-    label: #a3be8c;
-    value: #eceff4;
-    separator: #4c566a;
-    title: #a3be8c;
-    logo: #a3be8c;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: green;
+  host: green;
+  label: green;
+  value: green;
+  separator: green;
+  title: green;
+  logo: green;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #a3be8c;
+  enabled: true;
+  distro: auto;
+  color: green;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user} @ {host}";
+}
+
+@info {
+  os: true;
+  host: false;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: false;
+  terminal: false;
+  de: true;
+  wm: true;
+  cpu: true;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: false;
 }
+
+custom: "🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿";

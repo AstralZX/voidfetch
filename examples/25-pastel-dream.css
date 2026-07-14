@@ -1,51 +1,58 @@
-/* 25 - pastel dream */
+@theme pastel;
+@style rainbow;
+@palette pastel;
+@separator " ·· ";
+@margin 3;
+@opacity medium;
+@bold false;
+@italic true;
+@underline false;
+@glow false;
+@font "Comfortaa";
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: false;
-}
-
-@colors {
-    user: #ff6b9d;
-    host: #c084fc;
-    label: #67e8f9;
-    value: #fef3c7;
-    separator: #d1d5db;
-    title: #ff6b9d;
-    logo: #ff6b9d;
-}
-
-@info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+@color {
+  user: pink;
+  host: cyan;
+  label: purple;
+  value: blue;
+  separator: green;
+  title: pink;
+  logo: pink;
 }
 
 @logo {
-    enabled: true;
-    distro: auto;
-    color: #ff6b9d;
+  enabled: true;
+  distro: auto;
+  color: pink;
 }
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user} ~ {host}";
+}
+
+custom: "♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡";
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: true;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
 @labels {
-    capitalize: true;
+  capitalize: true;
+  uppercase: false;
 }

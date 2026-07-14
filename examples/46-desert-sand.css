@@ -1,28 +1,39 @@
-/* 46 - desert sand */
+/* voidfetch config - desert-sand */
 
-:root {
-    separator: "·";
-    padding: 2;
-    bold: true;
-}
-
-@colors {
-    user: #d2691e;
-    host: #cd853f;
-    label: #deb887;
-    value: #faebd7;
-    separator: #a0522d;
-    title: #d2691e;
-    logo: #cd853f;
-}
-
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #d2691e;
-}
+@theme arctic
+@style compact
+@separator " ⟡ "
+@margin 2
+@opacity low
+@italic true
 
 @title {
-    enabled: true;
-    format: "{user}@{host}";
+  enabled: true;
+  format: "{user} ∿ {host}";
 }
+
+@info {
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: true;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
+}
+
+@labels {
+  capitalize: true;
+  uppercase: false;
+}
+
+custom: "░▒▓▒░▒▓▒░▒▓▒░▒▓▒░▒▓▒░▒";

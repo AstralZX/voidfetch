@@ -1,51 +1,32 @@
-/* 33 - sakura pink */
+@reset;
 
-:root {
-    separator: "─";
-    padding: 2;
-    bold: true;
-}
+@theme sakura;
+@style fancy;
+@separator " ❋ ";
+@margin 3;
+@italic true;
+@glow true;
 
-@colors {
-    user: #ff69b4;
-    host: #ff1493;
-    label: #db7093;
-    value: #fff0f5;
-    separator: #8b0045;
-    title: #ff69b4;
-    logo: #ff69b4;
-}
+@title { enabled: true; format: "❀ {user} ❀ {host} ❀"; }
+@logo { enabled: false; }
 
 @info {
-    os: true;
-    host: true;
-    kernel: true;
-    uptime: true;
-    packages: true;
-    shell: true;
-    terminal: true;
-    de: true;
-    wm: true;
-    cpu: true;
-    gpu: true;
-    memory: true;
-    disk: true;
-    locale: true;
-    battery: false;
-    resolution: true;
+  os: true;
+  host: true;
+  kernel: true;
+  uptime: true;
+  packages: false;
+  shell: false;
+  terminal: false;
+  de: false;
+  wm: false;
+  cpu: false;
+  gpu: false;
+  memory: true;
+  disk: false;
+  locale: false;
+  battery: false;
+  resolution: false;
 }
 
-@logo {
-    enabled: true;
-    distro: auto;
-    color: #ff69b4;
-}
-
-@title {
-    enabled: true;
-    format: "{user}@{host}";
-}
-
-@labels {
-    capitalize: true;
-}
+custom: "✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿";
