@@ -9,10 +9,10 @@ pub fn logos_dir() -> PathBuf {
     let exe = env::current_exe().unwrap_or_default();
     let exe_dir = exe.parent().unwrap_or(&PathBuf::from(".")).to_path_buf();
 
+    // check a few places where logos might be
     let candidates = vec![
         exe_dir.join("logos"),
         exe_dir.join("..").join("logos"),
-        exe_dir.join("..").join("..").join("logos"),
         exe_dir.join("../share/voidfetch/logos"),
         PathBuf::from("/usr/share/voidfetch/logos"),
         PathBuf::from("/usr/local/share/voidfetch/logos"),
@@ -39,7 +39,6 @@ pub fn logos_dir() -> PathBuf {
     exe_dir.join("logos")
 }
 
-// try to figure out what distro we're on
 fn detect_distro() -> String {
     if cfg!(target_os = "windows") {
         return "windows".into();
@@ -60,481 +59,116 @@ fn detect_distro() -> String {
         }
     }
 
+    // common distros -> logo name
     let aliases: &[(&str, &str)] = &[
-        // ── Arch-based ──
+        // arch family
         ("arch", "arch"),
         ("archlinux", "arch"),
         ("manjaro", "manjaro"),
         ("endeavouros", "endeavouros"),
-        ("endeavour", "endeavouros"),
         ("garuda", "garuda"),
         ("artix", "artix"),
         ("cachyos", "cachyos"),
         ("blackarch", "blackarch"),
-        ("archcraft", "archcraft"),
-        ("archlabs", "archlabs"),
-        ("archstrike", "archstrike"),
-        ("anarchy", "anarchy"),
-        ("arcolinux", "arco"),
-        ("arco", "arco"),
-        ("cleanjaro", "cleanjaro"),
-        ("swagarch", "swagarch"),
-        ("xeroarch", "xeroarch"),
-        ("berserkarch", "berserkarch"),
-        ("bedrock", "bedrock"),
-        ("blendos", "arch"),
-        ("vanillalinux", "arch"),
 
-        // ── Debian-based ──
+        // debian family
         ("debian", "debian"),
         ("raspbian", "debian"),
         ("devuan", "devuan"),
-        ("antix", "antix"),
-        ("antixos", "antix"),
-        ("bunsenlabs", "bunsenlabs"),
-        ("parsix", "parsix"),
-        ("kaisen", "kaisen"),
-        ("siduction", "siduction"),
         ("deepin", "deepin"),
-        ("droidian", "droidian"),
-        ("postmarketos", "postmarketos"),
-        ("dietpi", "dietpi"),
-        ("vzlinux", "vzlinux"),
-        ("cumulus", "debian"),
 
-        // ── Ubuntu-based ──
+        // ubuntu family
         ("ubuntu", "ubuntu"),
         ("xubuntu", "xubuntu"),
         ("kubuntu", "kubuntu"),
         ("lubuntu", "lubuntu"),
-        ("ubuntu-budgie", "ubuntu_budgie"),
-        ("ubuntu-cinnamon", "ubuntu_cinnamon"),
-        ("ubuntu-gnome", "ubuntu_gnome"),
-        ("ubuntu-mate", "ubuntu_mate"),
-        ("ubuntu-studio", "ubuntu_studio"),
-        ("ubuntu-unity", "ubuntu_unity"),
-        ("ubuntu-kylin", "ubuntu_kylin"),
-        ("ubuntu-sway", "ubuntu_sway"),
-        ("ubuntu-touch", "ubuntu_touch"),
         ("pop", "popos"),
         ("popos", "popos"),
         ("zorin", "zorin"),
         ("elementary", "elementary"),
-        ("elementaryos", "elementary"),
-        ("kde_neon", "kdeneon"),
-        ("neon", "kdeneon"),
-        ("peppermint", "peppermint"),
-        ("tails", "tails"),
-        ("tailsos", "tails"),
-        ("regolith", "regolith"),
-        ("cosmic", "cosmic"),
-        ("bodhi", "bodhi"),
-        ("sparky", "sparky"),
-        ("linuxlite", "linuxlite"),
-        ("linspire", "linspire"),
-        ("mx", "mx"),
-        ("mxlinux", "mx"),
         ("linuxmint", "linuxmint"),
         ("lmde", "lmde"),
         ("kali", "kali"),
         ("parrot", "parrot"),
-        ("cutefishos", "cutefishos"),
-        ("cuteos", "cuteos"),
-        ("nexalinux", "nexalinux"),
-        ("ublinux", "ublinux"),
-        ("unifi", "unifi"),
-        ("biglinux", "biglinux"),
-        ("chrom", "chrom"),
-        ("tuxedo_os", "tuxedo_os"),
-        ("openkylin", "openkylin"),
-        ("uos", "uos"),
-        ("linpus", "uos"),
-        ("kylin", "kylin"),
-        ("harmonyos", "harmonyos"),
-        ("gxde", "gxde"),
+        ("mx", "mx"),
+        ("mxlinux", "mx"),
+        ("sparky", "sparky"),
+        ("bodhi", "bodhi"),
+        ("tails", "tails"),
+        ("cosmic", "cosmic"),
+        ("regolith", "regolith"),
 
-        // ── Fedora-based ──
+        // fedora family
         ("fedora", "fedora"),
         ("nobara", "nobara"),
         ("bazzite", "bazzite"),
         ("ultramarine", "ultramarine"),
-        ("korora", "korora"),
-        ("fedora-kinoite", "fedora_kinoite"),
-        ("fedora-silverblue", "fedora_silverblue"),
-        ("fedora-sericea", "fedora_sericea"),
-        ("fedora-coreos", "fedora_coreos"),
-        ("rebl", "fedora"),
 
-        // ── RHEL-based ──
+        // rhel family
         ("rhel", "rhel"),
-        ("rhel_old", "rhel"),
         ("centos", "centos"),
         ("almalinux", "alma"),
         ("alma", "alma"),
         ("rocky", "rocky"),
-        ("ol", "oracle"),
         ("oracle", "oracle"),
         ("amzn", "amazon_linux"),
         ("amazon_linux", "amazon_linux"),
-        ("eurolinux", "eurolinux"),
-        ("scientific", "scientific"),
-        ("redhat", "rhel"),
-        ("nethydra", "centos"),
-        ("truenas", "truenas"),
         ("proxmox", "proxmox"),
-        ("cbl_mariner", "cbl_mariner"),
-        ("azurelinux", "azurelinux"),
-        ("torizoncore", "torizoncore"),
 
-        // ── SUSE-based ──
+        // suse family
         ("opensuse-leap", "opensuse_leap"),
         ("opensuse-tumbleweed", "opensuse_tumbleweed"),
-        ("opensuse-microos", "opensuse_microos"),
-        ("opensuse-slowroll", "opensuse_slowroll"),
         ("opensuse", "opensuse"),
-        ("sles", "suse"),
         ("suse", "suse"),
-        ("openmamba", "openmamba"),
+        ("sles", "suse"),
 
-        // ── Gentoo-based ──
+        // gentoo
         ("gentoo", "gentoo"),
         ("funtoo", "funtoo"),
-        ("exherbo", "exherbo"),
-        ("calculate", "calculate"),
-        ("source_mage", "source_mage"),
-        ("sourcemage", "source_mage"),
 
-        // ── NixOS ──
+        // nix
         ("nixos", "nixos"),
 
-        // ── Slackware-based ──
+        // slackware
         ("slackware", "slackware"),
-        ("slackel", "slackel"),
-        ("salix", "salix"),
-        ("pclinuxos", "pclinuxos"),
 
-        // ── Alpine / Void ──
+        // alpine / void
         ("alpine", "alpine"),
         ("void", "void"),
 
-        // ── BSDs (uname fallback handled below, but also in os-release) ──
+        // bsd
         ("freebsd", "freebsd"),
         ("openbsd", "openbsd"),
         ("netbsd", "netbsd"),
         ("dragonfly", "dragonfly"),
         ("ghostbsd", "ghostbsd"),
-        ("midnightbsd", "midnightbsd"),
-        ("nomadbsd", "nomadbsd"),
-        ("bitrig", "bitrig"),
-        ("bsd", "bsd"),
-        ("pacbsd", "pacbsd"),
 
-        // ── Haiku ──
+        // other
         ("haiku", "haiku"),
-        ("haikuos", "haiku"),
-
-        // ── Android / ChromeOS ──
         ("android", "android"),
         ("chromeos", "chromeos"),
-        ("chromiumos", "chromeos"),
-
-        // ── macOS / Windows (handled by cfg above, but also in os-release) ──
         ("macos", "macos"),
         ("windows", "windows"),
-        ("windows11", "windows_11"),
-        ("windows_11", "windows_11"),
-        ("windows_10", "windows"),
-        ("windows_2025", "windows_2025"),
-        ("windows_8", "windows_8"),
-        ("windows_95", "windows_95"),
-
-        // ── SteamOS / Steam Deck ──
         ("steamos", "steamos"),
         ("steamdeck", "steamdeck"),
-        ("holos", "steamdeck"),
 
-        // ── clear linux ──
-        ("clear-linux-os", "clear_linux"),
-        ("clear_linux", "clear_linux"),
-        ("clear", "clear_linux"),
-
-        // ── Mageia / Mandriva / Mandrake ──
-        ("mageia", "mageia"),
-        ("mandriva", "mandriva"),
-        ("mandrake", "mandriva"),
-        ("openmandriva", "openmandriva"),
-        ("openruyi", "openruyi"),
-        ("rosa", "rosa"),
-
-        // ── Solus ──
-        ("solus", "solus"),
-
-        // ── Pardus ──
-        ("pardus", "pardus"),
-
-        // ── ALT Linux ──
-        ("alt", "altlinux"),
-        ("altlinux", "altlinux"),
-        ("alt_linux", "altlinux"),
-
-        // ── openEuler ──
-        ("openeuler", "openeuler"),
-        ("open-euler", "openeuler"),
-
-        // ── AOSC OS ──
-        ("aosc", "aoscos"),
-        ("aosc_os", "aoscos"),
-
-        // ── Asahi Linux ──
-        ("asahi", "asahi"),
-
-        // ── Various independent distros ──
-        ("aster", "aster"),
-        ("asteroidos", "asteroidos"),
-        ("astos", "astos"),
-        ("astra", "astra_linux"),
-        ("athenaos", "athenaos"),
-        ("aurora", "aurora"),
-        ("axos", "axos"),
-        ("azos", "azos"),
-        ("blackmesa", "blackmesa"),
-        ("blackpanther", "blackpanther"),
-        ("blag", "blag"),
-        ("blankon", "blankon"),
-        ("bluelight", "bluelight"),
-        ("bonsai", "bonsai"),
-        ("bredos", "bredos"),
-        ("cbl_mariner", "cbl_mariner"),
-        ("celos", "celos"),
-        ("cereus", "cereus"),
+        // less common but still around
         ("chakra", "chakra"),
-        ("chaletos", "chaletos"),
-        ("chapeau", "chapeau"),
         ("chimera", "chimera_linux"),
         ("chimera_linux", "chimera_linux"),
-        ("chonkysealos", "chonkysealos"),
-        ("clover", "clover"),
-        ("cobalt", "cobalt"),
-        ("codex", "codex"),
-        ("condres", "condres"),
-        ("crystal", "crystal"),
+        ("clear-linux-os", "clear_linux"),
+        ("clear", "clear_linux"),
         ("crux", "crux"),
-        ("cucumber", "cucumber"),
-        ("cuerdos", "cuerdos"),
-        ("cyberos", "cyberos"),
-        ("cycledream", "cycledream"),
-        ("dahlia", "dahlia"),
-        ("darkos", "darkos"),
-        ("desaos", "desaos"),
-        ("dracos", "dracos"),
-        ("drauger", "drauger"),
-        ("elbrus", "elbrus"),
-        ("elive", "elive"),
-        ("emmabuntus", "emmabuntus"),
-        ("emperoros", "emperoros"),
-        ("encryptos", "encryptos"),
-        ("endless", "endless"),
-        ("enos", "enos"),
-        ("enso", "enso"),
-        ("eshanizedos", "eshanizedos"),
-        ("evolutionos", "evolutionos"),
-        ("eweos", "eweos"),
-        ("exodia_predator", "exodia_predator"),
-        ("fastfetch", "fastfetch"),
-        ("femboyos", "femboyos"),
-        ("feren", "feren"),
-        ("filotimo", "filotimo"),
-        ("finnix", "finnix"),
-        ("flatcar", "flatcar"),
-        ("floflis", "floflis"),
-        ("freemint", "freemint"),
-        ("frugalware", "frugalware"),
-        ("furreto", "furreto"),
-        ("galliumos", "galliumos"),
-        ("ghostfreak", "ghostfreak"),
-        ("glaucus", "glaucus"),
-        ("gnewsense", "gnewsense"),
-        ("gnu", "gnu"),
-        ("gobolinux", "gobolinux"),
-        ("goldendoglinux", "goldendoglinux"),
-        ("grapheneos", "grapheneos"),
-        ("grombyang", "grombyang"),
-        ("guix", "guix"),
-        ("hamonikr", "hamonikr"),
-        ("hardclanz", "hardclanz"),
-        ("hce", "hce"),
-        ("heliumos", "heliumos"),
-        ("huayra", "huayra"),
-        ("hybrid", "hybrid"),
-        ("hydroos", "hydroos"),
-        ("hyperbola", "hyperbola"),
-        ("hypros", "hypros"),
-        ("iglunix", "iglunix"),
-        ("instantos", "instantos"),
-        ("interix", "interix"),
-        ("irix", "irix"),
-        ("ironclad", "ironclad"),
-        ("itc", "itc"),
-        ("januslinux", "januslinux"),
-        ("kalpa", "kalpa"),
-        ("kaos", "kaos"),
-        ("kdelinux", "kdelinux"),
-        ("kernelos", "kernelos"),
-        ("kibaos", "kibaos"),
-        ("kibojoe", "kibojoe"),
-        ("kiss", "kiss"),
-        ("kogaion", "kogaion"),
-        ("krassos", "krassos"),
-        ("kslinux", "kslinux"),
-        ("lainos", "lainos"),
-        ("langitketujuh", "langitketujuh"),
-        ("laxeros", "laxeros"),
-        ("lede", "lede"),
-        ("lfs", "lfs"),
-        ("libreelec", "libreelec"),
-        ("lilidog", "lilidog"),
-        ("limeos", "limeos"),
-        ("lingmo", "lingmo"),
-        ("live_raizo", "live_raizo"),
-        ("lliurex", "lliurex"),
-        ("locos", "locos"),
-        ("lunar", "lunar"),
-        ("macaronios", "macaronios"),
-        ("magix", "magix"),
-        ("magpieos", "magpieos"),
-        ("mainsailos", "mainsailos"),
-        ("massos", "massos"),
-        ("matuusos", "matuusos"),
-        ("maui", "maui"),
-        ("mauna", "mauna"),
-        ("meowix", "meowix"),
-        ("mer", "mer"),
-        ("midos", "midos"),
-        ("minix", "minix"),
-        ("miracle_linux", "miracle_linux"),
-        ("mos", "mos"),
-        ("msys2", "msys2"),
-        ("namib", "namib"),
-        ("nebios", "nebios"),
-        ("nekos", "nekos"),
-        ("neptune", "neptune"),
-        ("netrunner", "netrunner"),
-        ("nitrux", "nitrux"),
-        ("nomadbsd", "nomadbsd"),
-        ("nuros", "nuros"),
-        ("nurunner", "nurunner"),
-        ("nutyx", "nutyx"),
-        ("obarun", "obarun"),
-        ("obrevenge", "obrevenge"),
-        ("obsidianos", "obsidianos"),
-        ("omnios", "omnios"),
-        ("openindiana", "openindiana"),
-        ("openstage", "openstage"),
-        ("openwrt", "openwrt"),
-        ("opnsense", "opnsense"),
-        ("orchid", "orchid"),
-        ("oreon", "oreon"),
-        ("origami", "origami"),
-        ("os2warp", "os2warp"),
-        ("osmc", "osmc"),
-        ("panwah", "panwah"),
-        ("parabola", "parabola"),
-        ("parch", "parch"),
-        ("pcbsd", "pcbsd"),
-        ("pearos", "pearos"),
-        ("pengwin", "pengwin"),
+        ("mageia", "mageia"),
+        ("mandriva", "mandriva"),
+        ("openmandriva", "openmandriva"),
+        ("pclinuxos", "pclinuxos"),
         ("pentoo", "pentoo"),
-        ("peropesis", "peropesis"),
-        ("phyos", "phyos"),
-        ("pikaos", "pikaos"),
-        ("pisi", "pisi"),
-        ("pnm_linux", "pnm_linux"),
-        ("porteus", "porteus"),
-        ("prismlinux", "prismlinux"),
-        ("puffos", "puffos"),
-        ("puppy", "puppy"),
         ("pureos", "pureos"),
-        ("q4os", "q4os"),
-        ("qts", "qts"),
-        ("quasar", "quasar"),
         ("qubes", "qubes"),
-        ("qubyt", "qubyt"),
-        ("quibian", "quibian"),
-        ("quirinux", "quirinux"),
-        ("radix", "radix"),
-        ("ravynos", "ravynos"),
-        ("rebornos", "rebornos"),
-        ("redcore", "redcore"),
-        ("redos", "redos"),
-        ("redrose", "redrose"),
-        ("redstar", "redstar"),
-        ("refracta", "refracta"),
-        ("regata", "regata"),
-        ("rengeos", "rengeos"),
-        ("rhaymos", "rhaymos"),
-        ("rhino", "rhino"),
-        ("sabayon", "sabayon"),
-        ("sabotage", "sabotage"),
-        ("sailfish", "sailfish"),
-        ("salentos", "salentos"),
-        ("salientos", "salientos"),
-        ("sambabox", "sambabox"),
-        ("sasanqua", "sasanqua"),
-        ("secureblue", "secureblue"),
-        ("semc", "semc"),
-        ("septor", "septor"),
-        ("serene", "serene"),
-        ("serpent_os", "serpent_os"),
-        ("sharklinux", "sharklinux"),
-        ("shastraos", "shastraos"),
-        ("shebang", "shebang"),
-        ("skiffos", "skiffos"),
-        ("sleeperos", "sleeperos"),
-        ("slitaz", "slitaz"),
-        ("smartos", "smartos"),
-        ("snigdhaos", "snigdhaos"),
-        ("soda", "soda"),
-        ("solaris", "solaris"),
-        ("spoinkos", "spoinkos"),
-        ("star", "star"),
-        ("stock_linux", "stock_linux"),
-        ("sulin", "sulin"),
-        ("summitos", "summitos"),
-        ("t2", "t2"),
-        ("tatra", "tatra"),
-        ("tearch", "tearch"),
-        ("templeos", "templeos"),
-        ("tileos", "tileos"),
-        ("trisquel", "trisquel"),
-        ("turkish", "turkish"),
-        ("twister", "twister"),
-        ("univalent", "univalent"),
-        ("univention", "univention"),
-        ("urukos", "urukos"),
-        ("uwuntu", "uwuntu"),
-        ("uzbek", "uzbek"),
-        ("valhalla", "valhalla"),
-        ("vanilla", "vanilla"),
-        ("venom", "venom"),
-        ("vincentos", "vincentos"),
-        ("vnux", "vnux"),
-        ("wii_linux", "wii_linux"),
-        ("wolfos", "wolfos"),
-        ("xcp_ng", "xcp_ng"),
-        ("xenia", "xenia"),
-        ("xferience", "xferience"),
-        ("ximper", "ximper"),
-        ("xinux", "xinux"),
-        ("xj380", "xj380"),
-        ("xray_os", "xray_os"),
-        ("yiffos", "yiffos"),
-        ("zerene", "zerene"),
-        ("zos", "zos"),
-        ("zraxyl", "zraxyl"),
-        ("lynx", "lynx"),
-        ("lynis", "lynx"),
-
-        // ── Generic "linux" fallback ──
+        ("solus", "solus"),
+        ("truenas", "truenas"),
+        ("voyage", "voyage"),
         ("linux", "linux"),
     ];
 
@@ -544,6 +178,7 @@ fn detect_distro() -> String {
         }
     }
 
+    // try id_like for derivatives
     for part in id_like.split_whitespace() {
         for (distro_id, logo_name) in aliases {
             if part == *distro_id {
@@ -552,22 +187,13 @@ fn detect_distro() -> String {
         }
     }
 
-    if id.starts_with("opensuse") {
-        return "opensuse".into();
-    }
-    if id.starts_with("ubuntu") {
-        return "ubuntu".into();
-    }
-    if id.starts_with("fedora") {
-        return "fedora".into();
-    }
-    if id.starts_with("centos") {
-        return "centos".into();
-    }
-    if id.starts_with("windows") {
-        return "windows".into();
-    }
+    // fallbacks for partial matches
+    if id.starts_with("opensuse") { return "opensuse".into(); }
+    if id.starts_with("ubuntu") { return "ubuntu".into(); }
+    if id.starts_with("fedora") { return "fedora".into(); }
+    if id.starts_with("centos") { return "centos".into(); }
 
+    // try uname for bsd etc
     let uname = std::process::Command::new("uname")
         .output()
         .map(|o| String::from_utf8_lossy(&o.stdout).trim().to_lowercase())

@@ -74,7 +74,7 @@ fn run_display(config_path: Option<&str>) {
 
 fn print_help() {
     println!(
-r#"voidfetch {} - minimal system info
+        r#"voidfetch {} - minimal system info
 
 USAGE:
     voidfetch [OPTIONS]
@@ -411,7 +411,6 @@ fn remove_path(path: &PathBuf) {
     }
 }
 
-// pretty straightforward - just line up the logo and info side by side
 fn render(cfg: &config::Config, info: &info::Info, logo: &Option<Vec<String>>) {
     let c = &cfg.colors;
     let s = &cfg.separator;

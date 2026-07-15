@@ -109,6 +109,7 @@ impl Default for Config {
 pub fn load() -> Config {
     let mut cfg = Config::default();
 
+    // look for --config / -c in args
     let args: Vec<String> = env::args().skip(1).collect();
     let mut config_path: Option<String> = None;
     let mut i = 0;
@@ -160,10 +161,10 @@ pub fn find_examples_dir() -> PathBuf {
         .and_then(|p| p.parent().map(|p| p.to_path_buf()))
         .unwrap_or_else(|| PathBuf::from("."));
 
+    // look in a few places
     let candidates = [
         exe_dir.join("examples"),
         exe_dir.join("../examples"),
-        exe_dir.join("../../examples"),
         exe_dir.join("../share/voidfetch/examples"),
     ];
 
@@ -234,6 +235,7 @@ pub fn example_count() -> usize {
     get_sorted_examples().len()
 }
 
+// replace $var references with their values
 fn resolve_variables(content: &str, variables: &HashMap<String, String>) -> String {
     if variables.is_empty() {
         return content.to_string();
@@ -253,7 +255,6 @@ fn resolve_variables(content: &str, variables: &HashMap<String, String>) -> Stri
     result
 }
 
-// theme name -> color scheme
 fn apply_theme(cfg: &mut Config, theme_name: &str) {
     let themes: &[(&[&str], &str, &str, &str, &str, &str, &str)] = &[
         (&["arctic", "arctic-frost"], "#88c0d0", "#81a1c1", "#88c0d0", "#eceff4", "#4c566a", "#88c0d0"),
@@ -455,7 +456,7 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
 
         if clean_line.is_empty() { continue; }
 
-        // Handle @import
+        // imports
         if clean_line.starts_with("@import") {
             let import_path = extract_directive_value(clean_line, "@import");
             if !import_path.is_empty() {
@@ -476,7 +477,7 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
             continue;
         }
 
-        // Handle standalone directives
+        // directives
         if clean_line.starts_with("@theme") {
             let v = extract_directive_value(clean_line, "@theme");
             if !v.is_empty() { apply_theme(cfg, &v); }
@@ -538,7 +539,7 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
             continue;
         }
 
-        // Handle @color { key: val; }
+        // @color { user: red; }
         if clean_line.starts_with("@color") {
             let body = clean_line.trim_start_matches("@color").trim()
                 .trim_start_matches('{').trim_end_matches('}').trim().to_string();
@@ -559,7 +560,7 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
             continue;
         }
 
-        // Handle variables
+        // variables: $accent: #88c0d0;
         if clean_line.starts_with('$') {
             if let Some((key, val)) = clean_line.split_once(':') {
                 let var_name = key.trim().trim_start_matches('$').trim().to_string();
@@ -571,14 +572,14 @@ fn apply_css_config(cfg: &mut Config, content: &str, _config_path: &PathBuf) {
             continue;
         }
 
-        // Track block context
+        // track which block we're in
         if clean_line.starts_with('@') || (brace_depth == 0 && clean_line.contains('{')) {
             if let Some(name) = clean_line.split('{').next() {
                 current_block = name.trim().trim_start_matches('@').to_lowercase();
             }
         }
 
-        // Track braces and collect properties
+        // count braces
         for ch in clean_line.chars() {
             match ch {
                 '{' => brace_depth += 1,
@@ -712,42 +713,14 @@ fn apply_properties(cfg: &mut Config, all_props: &[(String, String)]) {
 }
 
 pub fn print_default_config() {
-    println!(r#"/* voidfetch config - YES THIS IS CSS. DEAL WITH IT. */
+    println!(r#"/* voidfetch config */
 /* put this at ~/.config/voidfetch/config.css */
 
-/* ============================================ */
-/*  voidfetch v{} - config                    */
-/*  https://github.com/AstralZX/voidfetch     */
-/* ============================================ */
-
-/* --- import an example theme --- */
-/* @import "01-arctic-frost.css"; */
 /* @import "04-dracula.css"; */
-/* @import "07-catppuccin-mocha.css"; */
-/* @import "09-nord.css"; */
+/* @theme catppuccin; */
 
-/* --- or use a built-in theme (33 themes) --- */
-/* @theme arctic;  @theme sunset;  @theme neon; */
-/* @theme dracula; @theme tokyo;   @theme gruvbox; */
-/* @theme catppuccin; @theme nord; @theme onedark; */
-/* @theme rosepine; @theme solarized; @theme github; */
-/* @theme palenight; @theme matrix; @theme vaporwave; */
-/* @theme retro; @theme void; @theme sakura; */
-/* @theme blood; @theme ocean; @theme forest; */
-/* @theme lavender; @theme amber; @theme emerald; */
-/* @theme ice; @theme pastel; @theme crimson; */
-/* @theme golden; @theme space; @theme royal; */
-/* @theme abyss; @theme solar; */
-
-/* --- or use a style preset --- */
-/* @style minimal; @style compact; @style full; */
-/* @style fancy; @style hacker; @style retro; */
-/* @style clean; @style rainbow; */
-
-/* --- variables --- */
 $accent: #88c0d0;
 
-/* --- colors --- */
 @colors {{
     user: $accent;
     host: $accent;
@@ -757,35 +730,40 @@ $accent: #88c0d0;
     title: $accent;
 }}
 
-/* --- shortcuts --- */
+@info {{
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    de: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
+    locale: true;
+    battery: true;
+    resolution: true;
+}}
+
+@logo {{
+    enabled: true;
+    distro: auto;
+    color: auto;
+}}
+
+@title {{
+    enabled: true;
+    format: "{{user}}@{{host}}";
+}}
+
 /* @color {{ user: red; }} */
 /* @separator "═"; */
 /* @margin 2; */
-/* @opacity high; */
 /* @italic true; */
-/* @underline true; */
 /* @glow true; */
-/* @reset; */
-
-/* --- SYNTAX REFERENCE ---
- *
- * Variables:     $name: value;   use: $name
- * Import:        @import "file.css";
- * Themes:        @theme dracula;
- * Styles:        @style minimal;
- * Palettes:      @palette nord;
- * Colors:        @color {{ user: red; }}
- * Separator:     @separator "═";
- * Margin:        @margin 4;
- * Opacity:       @opacity low;
- * Italic:        @italic true;
- * Underline:     @underline true;
- * Glow:          @glow true;
- * Reset:         @reset;
- *
- * Colors:  red, green, yellow, blue, magenta, cyan,
- *          white, gray, orange, pink, lime, violet,
- *          indigo, coral, salmon, gold, crimson, teal
- * Formats: #ff6600 | rgb(255,102,0) | 256(208) | ansi(3)
-*/"#, env!("CARGO_PKG_VERSION"));
+/* @reset; */"#);
 }

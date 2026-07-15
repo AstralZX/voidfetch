@@ -37,8 +37,8 @@ fn read_file(path: &str) -> String {
     fs::read_to_string(path).unwrap_or_default()
 }
 
-// gather all system info in parallel using scoped threads
 pub fn gather() -> Info {
+    // spawn threads for all the slow stuff
     let (os, host, kernel, uptime, packages, shell, terminal, de, wm, cpu, gpu, memory, disk, locale, battery, resolution) = thread::scope(|s| {
         let t_os = s.spawn(|| get_os());
         let t_host = s.spawn(|| get_host());
@@ -143,12 +143,13 @@ fn get_uptime() -> String {
     let data = read_file("/proc/uptime");
     if let Some(first) = data.split_whitespace().next() {
         if let Ok(secs) = first.parse::<u64>() {
-            let (d, rem) = (secs / 86400, secs % 86400);
-            let (h, m) = (rem / 3600, (rem % 3600) / 60);
+            let days = secs / 86400;
+            let hours = (secs % 86400) / 3600;
+            let mins = (secs % 3600) / 60;
             let mut parts = Vec::with_capacity(3);
-            if d > 0 { parts.push(format!("{}d", d)); }
-            if h > 0 { parts.push(format!("{}h", h)); }
-            parts.push(format!("{}m", m));
+            if days > 0 { parts.push(format!("{}d", days)); }
+            if hours > 0 { parts.push(format!("{}h", hours)); }
+            parts.push(format!("{}m", mins));
             return parts.join(" ");
         }
     }
