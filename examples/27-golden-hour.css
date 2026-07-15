@@ -1,56 +1,12 @@
 @theme golden;
-@style fancy;
-@palette solarized;
-@separator " ◈ ";
+@separator "─";
 @margin 2;
-@opacity medium;
-@bold false;
 @italic true;
-@underline false;
-@glow true;
-@font "Cascadia Code";
 
-@color {
-  user: yellow;
-  host: yellow;
-  label: yellow;
-  value: yellow;
-  separator: yellow;
-  title: yellow;
-  logo: yellow;
-}
+@color { user: #daa520; host: #b8860b; label: #fff8dc; value: #fff8dc; separator: #8b6914; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: yellow;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "✧ {user} · {host} ✧";
-}
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
+custom: "════════════════════════════════";
+custom: "  golden hour";
+custom: "════════════════════════════════";

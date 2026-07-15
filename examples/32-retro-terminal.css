@@ -1,33 +1,10 @@
-@reset;
+@theme retro;
+@separator "-";
+@margin 1;
+@uppercase true;
 
-@style retro;
-@separator " - ";
-@margin 0;
-@opacity high;
-@italic false;
+@color { user: #33ff00; host: #33ff00; label: #33ff00; value: #33ff00; separator: #009900; }
 
-@title { enabled: true; format: "C:\\{user}>{host}"; }
-@logo { enabled: true; distro: windows; color: white; }
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels { uppercase: true; }
-
-custom: "[ SYSTEM BOOT v2.0 ]";
+custom: "C:\\> SYSTEM READY_";

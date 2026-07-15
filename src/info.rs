@@ -37,6 +37,7 @@ fn read_file(path: &str) -> String {
     fs::read_to_string(path).unwrap_or_default()
 }
 
+// gather all system info in parallel using scoped threads
 pub fn gather() -> Info {
     let (os, host, kernel, uptime, packages, shell, terminal, de, wm, cpu, gpu, memory, disk, locale, battery, resolution) = thread::scope(|s| {
         let t_os = s.spawn(|| get_os());

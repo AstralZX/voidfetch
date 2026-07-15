@@ -1,32 +1,9 @@
-@reset;
-
-@theme space;
-@style compact;
-@separator " ··· ";
-@margin 3;
-@opacity low;
+@separator "─";
+@margin 2;
 @italic true;
 
-@title { enabled: true; format: "  {user} ─ {host}  "; }
-@logo { enabled: false; }
+@color { user: #b0c4de; host: #778899; label: #e6e6fa; value: #e6e6fa; separator: #483d8b; }
 
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: true;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-custom: "·····························";
+custom: "·.·´¯\`·.· voidfetch ·.·´¯\`·.·";

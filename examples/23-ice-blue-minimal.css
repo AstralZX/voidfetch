@@ -1,55 +1,7 @@
 @theme ice;
-@style minimal;
-@palette nord;
-@separator " - ";
-@margin 0;
-@opacity low;
-@bold false;
-@italic false;
-@underline false;
-@glow false;
-@font "monospace";
+@separator "─";
+@margin 1;
 
-@color {
-  user: white;
-  host: white;
-  label: white;
-  value: white;
-  separator: white;
-  title: white;
-  logo: white;
-}
+@color { user: #add8e6; host: #b0e0e6; label: #f0f8ff; value: #f0f8ff; separator: #4682b4; }
 
-@logo {
-  enabled: false;
-  distro: auto;
-  color: white;
-}
-
-@title {
-  enabled: false;
-}
-
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; cpu: true; memory: true; disk: true; }

@@ -1,56 +1,12 @@
 @theme sakura;
-@style fancy;
-@palette pastel;
-@separator " ❀ ";
-@margin 3;
-@opacity medium;
-@bold false;
+@separator "✿";
+@margin 2;
 @italic true;
-@underline false;
-@glow true;
-@font "Quicksand";
 
-@color {
-  user: pink;
-  host: pink;
-  label: pink;
-  value: pink;
-  separator: pink;
-  title: pink;
-  logo: pink;
-}
+@color { user: #ffb7c5; host: #ff69b4; label: #fff0f5; value: #fff0f5; separator: #db7093; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: pink;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "✿ {user} ✿ {host} ✿";
-}
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: false;
-}
+custom: "════════════════════════════════";
+custom: "  sakura pink";
+custom: "════════════════════════════════";

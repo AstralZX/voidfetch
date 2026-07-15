@@ -1,58 +1,8 @@
 @theme crimson;
-@style full;
-@palette gruvbox;
-@separator " ╾ ";
-@margin 2;
-@opacity high;
+@separator "!";
+@margin 1;
 @bold true;
-@italic false;
-@underline true;
-@glow false;
-@font "Space Mono";
 
-@color {
-  user: red;
-  host: red;
-  label: red;
-  value: red;
-  separator: red;
-  title: red;
-  logo: red;
-}
+@color { user: #b22222; host: #cd5c5c; label: #fff5ee; value: #fff5ee; separator: #8b0000; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: red;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
-
-custom: "▓▒░ crimson ░▒▓";
-
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: true;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: true;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

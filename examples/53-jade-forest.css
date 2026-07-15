@@ -1,39 +1,7 @@
-/* voidfetch config - jade-forest */
+@separator "─";
+@margin 2;
+@italic true;
 
-@theme forest
-@style clean
-@separator " ❖ "
-@margin 3
-@italic true
-@underline true
+@color { user: #50c878; host: #2e8b57; label: #f0fff0; value: #f0fff0; separator: #228b22; }
 
-@title {
-  enabled: true;
-  format: "❖ {user} · {host} ❖";
-}
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: true;
-  wm: true;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
-
-custom: "❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖❖";
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

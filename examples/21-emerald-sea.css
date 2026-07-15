@@ -1,56 +1,8 @@
 @theme emerald;
-@style compact;
-@palette catppuccin;
-@separator " ≈ ";
-@margin 2;
-@opacity medium;
-@bold false;
-@italic false;
-@underline true;
-@glow false;
-@font "Iosevka";
+@separator "─";
+@margin 1;
+@italic true;
 
-@color {
-  user: green;
-  host: green;
-  label: green;
-  value: green;
-  separator: green;
-  title: green;
-  logo: green;
-}
+@color { user: #50c878; host: #00fa9a; label: #f0fff0; value: #f0fff0; separator: #2e8b57; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: green;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

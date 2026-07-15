@@ -1,57 +1,24 @@
 @theme solarized;
-@style clean;
-@palette solarized;
-@separator " · ";
+@separator "─";
 @margin 2;
-@opacity medium;
-@italic false;
-@underline false;
-@glow false;
-@font "IBM Plex Mono";
+@italic true;
 
-@color {
-  user: yellow;
-  host: orange;
-  label: base1;
-  value: base01;
-  separator: base02;
-  title: yellow;
-  logo: yellow;
-}
-
-@logo {
-  enabled: true;
-  distro: auto;
-  color: yellow;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
+@color { user: #268bd2; host: #2aa198; label: #839496; value: #839496; separator: #586e75; }
 
 @info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: true;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
+    os: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
 }
 
-@labels {
-  capitalize: true;
-  uppercase: true;
-}
-
-custom: "~~~~ solarized ~~~~";
+custom: "══════════════════════════════";
+custom: "  solarized dark";
+custom: "══════════════════════════════";

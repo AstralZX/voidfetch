@@ -1,58 +1,8 @@
 @theme amber;
-@style full;
-@palette solarized;
-@separator " ▸ ";
-@margin 1;
-@opacity medium;
-@bold true;
-@italic false;
-@underline false;
+@separator "─";
+@margin 2;
 @glow true;
-@font "Fira Code";
 
-@color {
-  user: yellow;
-  host: yellow;
-  label: yellow;
-  value: yellow;
-  separator: yellow;
-  title: yellow;
-  logo: yellow;
-}
+@color { user: #ffbf00; host: #ff8c00; label: #fffacd; value: #fffacd; separator: #ff6347; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: yellow;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
-
-custom: "░▒▓█ SYSTEM INFO █▓▒░";
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: true;
-  de: true;
-  wm: true;
-  cpu: true;
-  gpu: true;
-  memory: true;
-  disk: true;
-  locale: true;
-  battery: true;
-  resolution: true;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

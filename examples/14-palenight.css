@@ -1,57 +1,21 @@
 @theme palenight;
-@style clean;
-@palette tokyo;
-@separator " ┆ ";
-@margin 2;
-@opacity medium;
-@italic true;
-@underline false;
-@glow false;
-@font "Dank Mono";
+@separator " ║ ";
+@margin 3;
+@glow true;
 
-@color {
-  user: blue;
-  host: teal;
-  label: comment;
-  value: foreground;
-  separator: surface;
-  title: blue;
-  logo: purple;
-}
-
-@logo {
-  enabled: true;
-  distro: auto;
-  color: purple;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
+@color { user: #c792ea; host: #82aaff; label: #a6accd; value: #a6accd; separator: #39adb5; }
 
 @info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: true;
-  wm: true;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
+    os: true;
+    kernel: true;
+    uptime: true;
+    shell: true;
+    wm: true;
+    cpu: true;
+    memory: true;
+    disk: true;
 }
 
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
-
-custom: "░░░░░░░░░░░░░░░░░░░░";
+custom: "╔═══════════════════════════╗";
+custom: "║   voidfetch palenight    ║";
+custom: "╚═══════════════════════════╝";

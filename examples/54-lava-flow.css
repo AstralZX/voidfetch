@@ -1,43 +1,9 @@
-/* voidfetch config - lava-flow */
+@separator "!";
+@margin 1;
+@bold true;
 
-@theme sunset
-@style full
-@separator " ║ "
-@margin 2
-@italic false
-@bold true
-@glow true
-@underline true
+@color { user: #ff4500; host: #ff0000; label: #ffa500; value: #ffa500; separator: #8b0000; }
 
-@title {
-  enabled: true;
-  format: "╔═{user}═╗";
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: true;
-  de: true;
-  wm: true;
-  cpu: true;
-  gpu: true;
-  memory: true;
-  disk: true;
-  locale: true;
-  battery: true;
-  resolution: true;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
-
-custom: "╔════════════════════════╗";
-custom: "╠════════════════════════╣";
-custom: "╚════════════════════════╝";
+custom: "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";

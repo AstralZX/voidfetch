@@ -1,38 +1,6 @@
-/* voidfetch config - platinum */
+@separator "─";
+@margin 1;
 
-@theme onedark
-@style clean
-@separator " │ "
-@margin 2
-@italic false
-@bold true
-@underline true
+@color { user: #e5e4e2; host: #c0c0c0; label: #f5f5f5; value: #f5f5f5; separator: #a9a9a9; }
 
-@title {
-  enabled: true;
-  format: "═══ {user} ═══";
-}
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: true;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: true;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

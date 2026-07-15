@@ -1,38 +1,19 @@
 @theme dracula;
-@style full;
-@palette dracula;
-@separator "═";
+@separator "│";
 @margin 2;
-@opacity high;
-@italic false;
-@underline false;
-@glow true;
-@font "Fira Code";
+@underline true;
 
 @color {
-  user: purple;
-  host: cyan;
-  label: white;
-  value: green;
-  separator: purple;
-  title: pink;
-  logo: purple;
-}
-
-@logo {
-  enabled: true;
-  distro: auto;
-  color: purple;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
+  user: #bd93f9;
+  host: #ff79c6;
+  label: #f8f8f2;
+  value: #f8f8f2;
+  separator: #6272a4;
+  title: #bd93f9;
 }
 
 @info {
   os: true;
-  host: true;
   kernel: true;
   uptime: true;
   packages: true;
@@ -44,15 +25,8 @@
   gpu: true;
   memory: true;
   disk: true;
-  locale: true;
-  battery: true;
-  resolution: true;
 }
 
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
-
-custom: "╔══════════════════════╗";
-custom: "╚══════════════════════╝";
+custom: "═══════════════════════════════";
+custom: "  voidfetch - dracula theme";
+custom: "═══════════════════════════════";

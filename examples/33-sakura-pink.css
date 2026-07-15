@@ -1,32 +1,7 @@
-@reset;
-
 @theme sakura;
-@style fancy;
-@separator " ❋ ";
-@margin 3;
-@italic true;
-@glow true;
+@separator "│";
+@margin 2;
 
-@title { enabled: true; format: "❀ {user} ❀ {host} ❀"; }
-@logo { enabled: false; }
+@color { user: #ffb7c5; host: #ff69b4; label: #fff0f5; value: #fff0f5; separator: #db7093; }
 
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-custom: "✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿✿";
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

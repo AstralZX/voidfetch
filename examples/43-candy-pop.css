@@ -1,33 +1,9 @@
-@reset;
-
-@theme catppuccin;
-@style rainbow;
-@separator " ♦ ";
+@separator "♦";
 @margin 2;
-@italic false;
-@bold true;
 @glow true;
 
-@title { enabled: true; format: "♥ {user} ♥ {host} ♥"; }
-@logo { enabled: false; }
+@color { user: #ff69b4; host: #ff1493; label: #ffb6c1; value: #ffb6c1; separator: #c71585; }
 
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-custom: "♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥";
+custom: "★ candy pop ★";

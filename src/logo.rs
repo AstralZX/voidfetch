@@ -39,6 +39,7 @@ pub fn logos_dir() -> PathBuf {
     exe_dir.join("logos")
 }
 
+// try to figure out what distro we're on
 fn detect_distro() -> String {
     if cfg!(target_os = "windows") {
         return "windows".into();

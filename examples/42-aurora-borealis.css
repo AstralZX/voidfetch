@@ -1,32 +1,11 @@
-@reset;
-
-@theme ice;
-@style clean;
-@separator " ╶ ";
-@margin 3;
+@palette nord;
+@separator "─";
+@margin 2;
 @italic true;
 @underline true;
 
-@title { enabled: true; format: "{user}@{host}"; }
-@logo { enabled: true; distro: auto; color: cyan; }
+@color { user: #88c0d0; host: #a3be8c; label: #eceff4; value: #eceff4; }
 
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: true;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-custom: "╔═══════════════════════╗";
+custom: "─── aurora borealis ───";

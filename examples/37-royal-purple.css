@@ -1,33 +1,12 @@
-@reset;
-
 @theme royal;
-@style fancy;
-@separator " ║ ";
-@margin 3;
-@italic false;
-@bold true;
+@separator "═";
+@margin 2;
 @glow true;
 
-@title { enabled: true; format: "╔═ {user} ═╗"; }
-@logo { enabled: true; distro: auto; }
+@color { user: #7851a9; host: #9370db; label: #e6e6fa; value: #e6e6fa; separator: #4b0082; }
 
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: true;
-  de: true;
-  wm: true;
-  cpu: true;
-  gpu: true;
-  memory: true;
-  disk: true;
-  locale: true;
-  battery: true;
-  resolution: true;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-custom: "╔════════════════════════╗\n╚════════════════════════╝";
+custom: "════════════════════════════════";
+custom: "  royal purple";
+custom: "════════════════════════════════";

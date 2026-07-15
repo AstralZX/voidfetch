@@ -1,33 +1,15 @@
 @theme catppuccin;
-@style rainbow;
-@palette catppuccin;
 @separator "│";
-@margin 3;
-@opacity high;
+@margin 2;
 @italic true;
-@underline false;
-@glow false;
-@font "Maple Mono";
 
 @color {
-  user: mauve;
-  host: blue;
-  label: overlay2;
-  value: text;
-  separator: surface2;
-  title: pink;
-  logo: pink;
-}
-
-@logo {
-  enabled: true;
-  distro: auto;
-  color: pink;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
+  user: #cba6f7;
+  host: #f5c2e7;
+  label: #cdd6f4;
+  value: #cdd6f4;
+  separator: #585b70;
+  title: #cba6f7;
 }
 
 @info {
@@ -44,14 +26,8 @@
   gpu: true;
   memory: true;
   disk: true;
-  locale: true;
-  battery: true;
-  resolution: true;
 }
 
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
-
-custom: "─── system info ───";
+custom: "══════════════════════════════════";
+custom: "  voidfetch - catppuccin mocha";
+custom: "══════════════════════════════════";

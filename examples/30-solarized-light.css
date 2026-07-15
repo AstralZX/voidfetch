@@ -1,56 +1,7 @@
 @theme solarized;
-@style clean;
+@separator "─";
+@margin 2;
+
 @palette solarized;
-@separator " : ";
-@margin 1;
-@opacity medium;
-@bold false;
-@italic false;
-@underline false;
-@glow false;
-@font "Fira Code";
 
-@color {
-  user: white;
-  host: white;
-  label: white;
-  value: white;
-  separator: white;
-  title: white;
-  logo: white;
-}
-
-@logo {
-  enabled: true;
-  distro: auto;
-  color: white;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
-
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: true;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

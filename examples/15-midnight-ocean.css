@@ -1,55 +1,7 @@
 @theme ocean;
-@style fancy;
-@palette catppuccin;
-@separator " ≡ ";
-@margin 3;
-@opacity high;
-@italic false;
-@underline true;
-@glow true;
-@font "Pragmata Pro";
+@separator "─";
+@margin 2;
 
-@color {
-  user: blue;
-  host: teal;
-  label: overlay0;
-  value: text;
-  separator: blue;
-  title: blue;
-  logo: teal;
-}
+@color { user: #00ced1; host: #20b2aa; label: #e0ffff; value: #e0ffff; separator: #2f4f4f; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: teal;
-}
-
-@title {
-  enabled: true;
-  format: "⟪ {user} ∙ {host} ⟫";
-}
-
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: true;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: true;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

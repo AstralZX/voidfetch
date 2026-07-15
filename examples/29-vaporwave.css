@@ -1,58 +1,11 @@
 @theme vaporwave;
-@style retro;
-@palette rainbow;
-@separator " ꞏ ";
-@margin 4;
-@opacity medium;
-@bold true;
-@italic true;
-@underline false;
+@separator "◆";
+@margin 3;
 @glow true;
-@font "Press Start 2P";
+@italic true;
 
-@color {
-  user: magenta;
-  host: cyan;
-  label: magenta;
-  value: cyan;
-  separator: magenta;
-  title: magenta;
-  logo: magenta;
-}
+@color { user: #ff71ce; host: #01cdfe; label: #05ffa1; value: #05ffa1; separator: #b967ff; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: cyan;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: " ▲ A E S T H E T I C ▲ ";
-}
-
-custom: "░░░░░░░░░░░░░░░░░░░░░░░░";
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: true;
-  wm: true;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: false;
-}
+custom: "░▒▓█ VOIDFETCH █▓▒░";

@@ -1,55 +1,9 @@
 @theme sunset;
-@style fancy;
-@palette gruvbox;
 @separator "▸";
 @margin 1;
-@opacity high;
-@italic false;
-@underline false;
-@glow true;
-@font "JetBrains Mono";
 
-@color {
-  user: red;
-  host: yellow;
-  label: white;
-  value: orange;
-  separator: red;
-  title: yellow;
-  logo: red;
-}
+@color { user: orange; host: red; label: yellow; value: white; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: orange;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; gpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "╔═ {user} @ {host} ═╗";
-}
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: true;
-  de: true;
-  wm: true;
-  cpu: true;
-  gpu: true;
-  memory: true;
-  disk: true;
-  locale: true;
-  battery: true;
-  resolution: true;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: true;
-}
+custom: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";

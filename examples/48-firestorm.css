@@ -1,39 +1,10 @@
-/* voidfetch config - firestorm */
+@separator "!";
+@margin 1;
+@bold true;
+@uppercase true;
 
-@theme sunset
-@style full
-@separator " ╻ "
-@margin 1
-@italic false
-@bold true
+@color { user: #ff4500; host: #ff0000; label: #ffa500; value: #ffa500; separator: #ff6347; }
 
-@title {
-  enabled: true;
-  format: "🔥 {user}@{host}";
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: true;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: true;
-}
-
-custom: "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓";
+custom: "🔥 FIRESTORM 🔥";

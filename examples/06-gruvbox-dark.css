@@ -1,55 +1,13 @@
 @theme gruvbox;
-@style compact;
 @palette gruvbox;
-@separator "::";
+@separator ":";
 @margin 1;
-@opacity high;
-@italic false;
-@underline false;
-@glow false;
-@font "Iosevka";
+@bold true;
 
-@color {
-  user: orange;
-  host: yellow;
-  label: fg3;
-  value: fg1;
-  separator: bg3;
-  title: orange;
-  logo: orange;
-}
+@color { user: #fabd2f; host: #fe8019; label: #ebdbb2; value: #ebdbb2; separator: #928374; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: orange;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
+@title { enabled: true; format: "{user}@{host}"; }
 
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: false;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: true;
-}
+custom: "---";

@@ -411,6 +411,7 @@ fn remove_path(path: &PathBuf) {
     }
 }
 
+// pretty straightforward - just line up the logo and info side by side
 fn render(cfg: &config::Config, info: &info::Info, logo: &Option<Vec<String>>) {
     let c = &cfg.colors;
     let s = &cfg.separator;

@@ -1,32 +1,6 @@
-@reset;
-
-@theme gruvbox;
-@style clean;
-@separator " • ";
+@separator "─";
 @margin 2;
-@opacity low;
-@italic true;
 
-@title { enabled: false; }
-@logo { enabled: false; }
+@color { user: #8b7355; host: #a0522d; label: #deb887; value: #deb887; separator: #8b4513; }
 
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels { uppercase: false; }
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

@@ -1,44 +1,9 @@
-/* voidfetch config - pixel-art */
+@separator "◆";
+@margin 2;
+@glow true;
 
-@theme monokai
-@style retro
-@separator " :: "
-@margin 1
-@italic false
-@bold true
+@color { user: #ff69b4; host: #ff1493; label: #ffb6c1; value: #ffb6c1; separator: #c71585; }
 
-@logo {
-  enabled: true;
-  distro: "cachyos";
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "[{user}@{host}]";
-}
-
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: true;
-}
-
-custom: "████████████████████████";
+custom: "░▒▓█ PIXEL ART █▓▒░";

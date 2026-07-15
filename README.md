@@ -1,6 +1,6 @@
 # voidfetch
 
-minimal system information tool. config is CSS.
+minimal system info tool. config is CSS.
 
 ```
            .-------------------------:                 @perfectcachy
@@ -27,24 +27,12 @@ minimal system information tool. config is CSS.
              ..........................
 ```
 
-## features
+## what is this
 
-- **single rust binary** - no dependencies, no runtime, no bloat
-- **CSS config** - configure everything with a `config.css` file
-- **61 example themes** - built-in presets ready to use
-- **33 built-in themes** - dracula, nord, catppuccin, gruvbox, and more
-- **8 style presets** - minimal, compact, fancy, hacker, retro, clean, rainbow
-- **9 palettes** - nord, dracula, catppuccin, gruvbox, solarized, tokyo, rainbow, mono, pastel
-- **542 distro logos** - with color support
-- **16 info fields** - OS, kernel, CPU, GPU, memory, disk, uptime, packages, battery, resolution, and more
-- **full color control** - named colors, hex, RGB, 256-color, ANSI
-- **variables** - define and reuse values across your config
-- **custom lines** - add ASCII art, separators, or any text
-- **cross-platform** - linux, macOS, freebsd, openbsd, windows
+single rust binary, no dependencies. configure everything with a `config.css` file.
+supports linux, macOS, freebsd, openbsd, windows.
 
-## installation
-
-### quick install
+## install
 
 ```sh
 git clone https://github.com/AstralZX/voidfetch.git
@@ -52,75 +40,46 @@ cd voidfetch
 ./install.sh
 ```
 
-this compiles and installs to `~/.local/bin/voidfetch`.
+installs to `~/.local/bin/voidfetch`. windows users can use `install.ps1`.
 
-### windows
-
-```powershell
-git clone https://github.com/AstralZX/voidfetch.git
-cd voidfetch
-.\install.ps1
-```
-
-### prebuilt binaries
-
-check the [releases](https://github.com/AstralZX/voidfetch/releases) page.
+or grab a binary from [releases](https://github.com/AstralZX/voidfetch/releases).
 
 ## usage
 
 ```
 voidfetch [OPTIONS]
 
-OPTIONS:
-    -h, --help            print help
-    -v, --version         print version
-    -c, --config <PATH>   use custom config file
-    -e, --example N       use example config by number (1-61)
-    --dump-config         print default config to stdout
-    --cred                open voidfetch github in browser
-    --sync                fetch latest from github, build and install
-    --explode             uninstall voidfetch from your system
-    --list-themes         list available built-in themes
-    --list-examples       list example configs with numbers
-    --list-logos          list available distro logos
+-h, --help            print help
+-v, --version         print version
+-c, --config <PATH>   use custom config file
+-e, --example N       use example config by number (1-61)
+--logo <NAME>         override distro logo
+--dump-config         print default config to stdout
+--cred                open github in browser
+--sync                update from github
+--explode             uninstall
+--list-themes         list built-in themes
+--list-examples       list example configs
+--list-logos          list available logos
 ```
 
-### examples
-
 ```sh
-# default display
-voidfetch
-
-# use example config #7 (catppuccin mocha)
-voidfetch --example 7
-
-# use a custom config file
-voidfetch --config ~/myconfig.css
-
-# see all available themes
-voidfetch --list-themes
-
-# see all example configs
-voidfetch --list-examples
-
-# generate a default config
+voidfetch                      # default
+voidfetch --example 7          # use example config #7
+voidfetch --logo arch          # force a logo
+voidfetch --config ~/my.css    # custom config
 voidfetch --dump-config > ~/.config/voidfetch/config.css
 ```
 
-## configuration
+## config
 
-the config file is searched in order:
-
-1. `--config <path>` or `-c <path>`
-2. `$VOIDFETCH_CONFIG` environment variable
+searched in order:
+1. `--config <path>`
+2. `$VOIDFETCH_CONFIG` env var
 3. `~/.config/voidfetch/config.css`
 4. `/etc/voidfetch/config.css`
 
-### config example
-
 ```css
-/* yes, the config is CSS. deal with it. */
-
 @theme catppuccin;
 
 :root {
@@ -168,64 +127,30 @@ the config file is searched in order:
     format: "{user}@{host}";
 }
 
-@labels {
-    capitalize: true;
-    uppercase: false;
-}
-
 custom: "════════════════════════════════";
 custom: "  voidfetch - embrace the void";
 custom: "════════════════════════════════";
 ```
 
-### import example configs
+### shortcuts
 
 ```css
-@import "04-dracula.css";
-@import "07-catppuccin-mocha.css";
-@import "09-nord.css";
-```
-
-### quick shortcuts
-
-```css
-/* theme preset */
-@theme dracula;
-@theme nord;
-@theme catppuccin;
-
-/* style preset */
-@style minimal;
-@style compact;
-@style fancy;
-
-/* palette */
-@palette nord;
-@palette dracula;
-
-/* single color override */
-@color { user: red; }
-
-/* separator */
+@theme dracula;         /* theme preset */
+@style minimal;         /* style preset */
+@palette nord;          /* palette */
+@color { user: red; }   /* single color */
 @separator "═";
-
-/* padding */
 @margin 4;
-
-/* text effects */
 @italic true;
 @underline true;
 @glow true;
-
-/* reset everything */
-@reset;
+@reset;                 /* reset all */
 ```
 
 ### variables
 
 ```css
 $accent: #88c0d0;
-$username: void;
 
 @colors {
     user: $accent;
@@ -233,102 +158,38 @@ $username: void;
 }
 ```
 
-variables resolve recursively up to 5 levels deep.
+resolves recursively up to 5 levels.
 
-### color options
+### colors
 
-| format | example |
-|--------|---------|
-| named | `red`, `cyan`, `orange`, `turquoise`, `pink`, `gold` |
-| hex | `#ff6600` |
-| rgb | `rgb(255, 102, 0)` |
-| 256-color | `256(208)` |
-| ANSI | `ansi(3)` |
-| none | `none` |
+named: `red`, `cyan`, `orange`, `turquoise`, `pink`, `gold`, etc
+hex: `#ff6600`
+rgb: `rgb(255, 102, 0)`
+256-color: `256(208)`
+ansi: `ansi(3)`
 
-available named colors: black, red, green, yellow, blue, magenta, cyan, white, gray, orange, pink, lime, violet, indigo, coral, salmon, gold, crimson, turquoise, aqua, purple, teal.
+### import
 
-### info fields
+```css
+@import "04-dracula.css";
+@import "07-catppuccin-mocha.css";
+```
 
-| field | description | default |
-|-------|-------------|---------|
-| `os` | operating system | on |
-| `host` | hardware model | on |
-| `kernel` | kernel version | on |
-| `uptime` | system uptime | on |
-| `packages` | package count | on |
-| `shell` | default shell | on |
-| `terminal` | terminal emulator | on |
-| `de` | desktop environment | on |
-| `wm` | window manager | on |
-| `cpu` | processor | on |
-| `gpu` | graphics card | on |
-| `memory` | ram usage | on |
-| `disk` | disk usage | on |
-| `locale` | system locale | on |
-| `battery` | battery status | on |
-| `resolution` | display resolution | on |
+## themes
 
-toggle any field in `@info { field: true/false; }`.
+33 built-in themes: arctic, sunset, neon, dracula, tokyo, gruvbox, catppuccin, monokai, nord, onedark, rosepine, solarized, github, palenight, matrix, vaporwave, retro, void, sakura, blood, ocean, forest, lavender, amber, emerald, ice, pastel, crimson, golden, space, royal, abyss, solar
 
-### built-in themes (33)
+## styles
 
-| theme | description |
-|-------|-------------|
-| arctic | Arctic Frost - icy blues and whites |
-| sunset | Sunset Fire - warm oranges and reds |
-| neon | Neon Cyberpunk - vibrant neon colors |
-| dracula | Dracula - purple and pink |
-| tokyo | Tokyo Night - blue and purple |
-| gruvbox | Gruvbox Dark - yellow and orange |
-| catppuccin | Catppuccin Mocha - purple, pink, teal |
-| monokai | Monokai Pro - classic monokai |
-| nord | Nord - frost blue palette |
-| onedark | One Dark - Atom one dark |
-| rosepine | Rose Pine - soft pink and purple |
-| solarized | Solarized Dark |
-| github | GitHub Dark |
-| palenight | Palenight - material palenight |
-| matrix | Matrix Green - green on black |
-| vaporwave | Vaporwave - pink, cyan, green |
-| retro | Retro Terminal - classic green |
-| void | Void Purple |
-| sakura | Sakura Pink - cherry blossom |
-| blood | Blood Moon - deep crimson |
-| ocean | Midnight Ocean - deep sea blues |
-| forest | Forest Green - natural greens |
-| lavender | Lavender Dreams - soft pastels |
-| amber | Amber Glow - warm golden |
-| emerald | Emerald Sea - jewel greens |
-| ice | Ice Blue - minimal icy |
-| pastel | Pastel Dream - soft pastels |
-| crimson | Crimson Tide - deep red |
-| golden | Golden Hour - warm golden |
-| space | Space Gray - dark minimal |
-| royal | Royal Purple |
-| abyss | Abyssal Deep - deep ocean |
-| solar | Solar Flare - bright solar |
+minimal, compact, full, fancy, hacker, retro, clean, rainbow
 
-### style presets (8)
+## palettes
 
-| style | description |
-|-------|-------------|
-| minimal | few fields, dim text, no logo extras |
-| compact | uppercase labels, tight spacing |
-| full | default, all fields enabled |
-| fancy | box-drawing borders, glow effect |
-| hacker | green-on-black, system initialized |
-| retro | old-school green terminal |
-| clean | no logo, no effects |
-| rainbow | multicolor everything |
+nord, dracula, catppuccin, gruvbox, solarized, tokyo, rainbow, mono, pastel
 
-### palettes (9)
+## distros
 
-nord, dracula, catppuccin, gruvbox, solarized, tokyo, rainbow, mono, pastel.
-
-## supported distros
-
-542 distro logos with automatic detection. includes: arch, manjaro, endeavouros, garuda, cachyos, artix, ubuntu, kubuntu, xubuntu, lubuntu, pop!\_os, zorin, debian, kali, parrot, linux mint, lmde, fedora, nobara, bazzite, ultramarine, rhel, centos, almalinux, rocky, oracle, amazon linux, opensuse (leap, tumbleweed, microos, slowroll), alpine, void, gentoo, nixos, slackware, mx linux, elementary, deepin, sparky, tails, manjaro, artix, freebsd, openbsd, netbsd, dragonflybsd, haiku, android, macos, windows, steamdeck, steamos, and 470+ more. run `voidfetch --list-logos` to see all.
+542 logos with auto-detection. run `voidfetch --list-logos` to see all.
 
 ## building
 
@@ -336,24 +197,7 @@ nord, dracula, catppuccin, gruvbox, solarized, tokyo, rainbow, mono, pastel.
 cargo build --release
 ```
 
-the binary is at `target/release/voidfetch`.
-
-## project structure
-
-```
-voidfetch/
-├── Cargo.toml
-├── src/
-│   ├── main.rs        # CLI, rendering, sync/explode
-│   ├── config.rs      # CSS parser, themes, palettes, styles
-│   ├── info.rs        # parallel system info gathering
-│   ├── logo.rs        # logo loader & colorizer
-│   └── ansi.rs        # ANSI color utilities
-├── logos/             # 542 distro ASCII art files
-├── examples/          # 61 example CSS config presets
-├── install.sh         # linux/macOS installer
-└── install.ps1        # windows installer
-```
+binary at `target/release/voidfetch`.
 
 ## license
 

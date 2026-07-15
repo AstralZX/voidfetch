@@ -1,58 +1,12 @@
 @theme matrix;
-@style hacker;
-@palette dracula;
 @separator " > ";
-@margin 1;
-@opacity medium;
-@bold true;
-@italic false;
-@underline false;
+@margin 2;
+@uppercase true;
 @glow true;
-@font "VT323";
 
-@color {
-  user: green;
-  host: green;
-  label: green;
-  value: green;
-  separator: green;
-  title: green;
-  logo: green;
-}
+@color { user: #00ff00; host: #00ff00; label: #00ff00; value: #00ff00; separator: #009900; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: green;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
-
-custom: "[ ENTER THE MATRIX ]";
-
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: true;
-}
+custom: "[ SYSTEM INITIALIZED ]";
+custom: "─────────────────────────────────";

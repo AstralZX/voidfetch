@@ -1,46 +1,10 @@
-/* voidfetch config - gothic-dark */
+@theme dark;
+@separator "─";
+@margin 2;
+@italic true;
 
-@theme dracula
-@style fancy
-@separator " ⚰ "
-@margin 4
-@italic true
-@bold true
-@glow true
+@color { user: #4a0e4e; host: #8b008b; label: #dda0dd; value: #dda0dd; separator: #4b0082; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: "white";
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "† {user} † {host} †";
-}
-
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
-
-custom: "†═══════════════════════════†";
+custom: "† gothic dark †";

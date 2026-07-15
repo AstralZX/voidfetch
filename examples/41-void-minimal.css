@@ -1,31 +1,8 @@
-@reset;
-
-@theme void;
-@style minimal;
-@separator " - ";
+@separator "-";
 @margin 0;
-@opacity low;
+@bold false;
+@dim true;
 
-@title { enabled: false; }
-@logo { enabled: false; }
+@color { user: #478061; host: #96a7c9; label: gray; value: white; }
 
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels { uppercase: false; }
+@info { os: true; kernel: true; uptime: true; shell: true; cpu: true; memory: true; disk: true; }

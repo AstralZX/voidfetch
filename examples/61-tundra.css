@@ -1,43 +1,9 @@
-/* voidfetch config - tundra */
+@separator "─";
+@margin 2;
+@italic true;
 
-@theme ice
-@style minimal
-@separator " ── "
-@margin 3
-@italic false
-@opacity low
+@color { user: #b0e0e6; host: #add8e6; label: #f0f8ff; value: #f0f8ff; separator: #4682b4; }
 
-@logo {
-  enabled: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "{user} — {host}";
-}
-
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: false;
-}
-
-custom: "─────────────────────────────";
+custom: "❄ tundra ❄";

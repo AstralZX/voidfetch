@@ -1,56 +1,11 @@
 @theme void;
-@style fancy;
-@palette tokyo;
-@separator " ⊕ ";
-@margin 3;
-@opacity medium;
-@bold true;
-@italic true;
-@underline false;
-@glow true;
-@font "Fira Code";
+@separator "::";
+@margin 2;
 
-@color {
-  user: magenta;
-  host: magenta;
-  label: magenta;
-  value: magenta;
-  separator: magenta;
-  title: magenta;
-  logo: magenta;
-}
+@color { user: #478061; host: #96a7c9; label: #ffffff; value: #ffffff; separator: #96a7c9; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: magenta;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "⟪{user}⟫ ⟪{host}⟫";
-}
-
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: true;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
+custom: "─────────────────────────────────";
+custom: "  void linux";
+custom: "─────────────────────────────────";

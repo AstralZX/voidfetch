@@ -1,55 +1,20 @@
 @theme tokyo;
-@style clean;
-@palette tokyo;
-@separator "●";
+@separator "─";
 @margin 2;
-@opacity low;
-@italic false;
-@underline false;
-@glow false;
-@font "MonoLisa";
+@glow true;
 
-@color {
-  user: blue;
-  host: magenta;
-  label: comment;
-  value: foreground;
-  separator: comment;
-  title: blue;
-  logo: purple;
-}
+@color { user: #7aa2f7; host: #bb9af7; label: #c0caf5; value: #c0caf5; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: purple;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
+@logo { enabled: true; distro: auto; color: #7aa2f7; }
 
 @info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: true;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: false;
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    shell: true;
+    wm: true;
+    cpu: true;
+    memory: true;
+    disk: true;
 }

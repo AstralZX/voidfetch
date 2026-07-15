@@ -1,40 +1,9 @@
-/* voidfetch config - infrared */
+@separator "::";
+@margin 2;
+@glow true;
 
-@theme blood
-@style hacker
-@separator " ▶ "
-@margin 1
-@italic false
-@bold true
-@glow true
+@color { user: #ff0000; host: #ff4500; label: #ffa500; value: #ffa500; separator: #ff6347; }
 
-@title {
-  enabled: true;
-  format: ">>{user}::{host}<<";
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: true;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: true;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: true;
-}
-
-custom: "══════════════════════════";
+custom: "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓";

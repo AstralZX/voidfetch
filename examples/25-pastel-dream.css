@@ -1,58 +1,9 @@
 @theme pastel;
-@style rainbow;
-@palette pastel;
-@separator " ·· ";
-@margin 3;
-@opacity medium;
-@bold false;
-@italic true;
-@underline false;
-@glow false;
-@font "Comfortaa";
+@separator "─";
+@margin 2;
 
-@color {
-  user: pink;
-  host: cyan;
-  label: purple;
-  value: blue;
-  separator: green;
-  title: pink;
-  logo: pink;
-}
+@color { user: #ffb3ba; host: #bae1ff; label: #ffffba; value: #ffffba; separator: #baffc9; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: pink;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; terminal: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@title {
-  enabled: true;
-  format: "{user} ~ {host}";
-}
-
-custom: "♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡";
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
+custom: "～～～～～～～～～～～～～～～～～～～";

@@ -1,57 +1,27 @@
 @theme neon;
-@style hacker;
-@palette rainbow;
-@separator "┃";
+@separator "::";
 @margin 3;
-@opacity high;
 @italic true;
-@underline true;
-@glow false;
-@font "Share Tech Mono";
 
-@color {
-  user: magenta;
-  host: cyan;
-  label: magenta;
-  value: white;
-  separator: magenta;
-  title: cyan;
-  logo: magenta;
-}
+@color { user: magenta; host: cyan; label: white; value: magenta; separator: cyan; title: magenta; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: cyan;
-}
+@logo { enabled: true; distro: auto; color: magenta; }
 
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
+@title { enabled: true; format: "{user}@{host}"; }
 
 @info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: true;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
+    os: true;
+    host: true;
+    kernel: true;
+    uptime: true;
+    packages: true;
+    shell: true;
+    terminal: true;
+    wm: true;
+    cpu: true;
+    gpu: true;
+    memory: true;
+    disk: true;
 }
 
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
-
-custom: "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓";
+custom: "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";

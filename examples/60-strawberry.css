@@ -1,39 +1,9 @@
-/* voidfetch config - strawberry */
+@separator "─";
+@margin 2;
+@italic true;
 
-@theme rosepine
-@style fancy
-@separator " ❀ "
-@margin 2
-@italic true
-@glow true
+@color { user: #ff6b6b; host: #ff1493; label: #fff0f5; value: #fff0f5; separator: #db7093; }
 
-@title {
-  enabled: true;
-  format: "♡ {user} ∙ {host} ♡";
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }
 
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
-
-custom: "♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡";
+custom: "🍓 strawberry 🍓";

@@ -1,36 +1,6 @@
-/* voidfetch config - harmony-green */
+@separator "─";
+@margin 2;
 
-@theme forest
-@style clean
-@separator " ☘ "
-@margin 2
-@italic true
+@color { user: #228b22; host: #32cd32; label: #f0fff0; value: #f0fff0; separator: #006400; }
 
-@title {
-  enabled: true;
-  format: "{user} ❧ {host}";
-}
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: false;
-  uppercase: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

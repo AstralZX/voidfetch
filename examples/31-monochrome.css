@@ -1,33 +1,9 @@
-@reset;
-
-@style minimal;
-@separator " = ";
+@palette mono;
+@separator "─";
 @margin 1;
-@opacity low;
-@italic false;
+@bold false;
+@dim true;
 
-@title { enabled: false; }
-@logo { enabled: false; }
+@color { user: white; host: gray; label: white; value: white; }
 
-@info {
-  os: true;
-  host: false;
-  kernel: true;
-  uptime: false;
-  packages: false;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: true;
-  gpu: false;
-  memory: true;
-  disk: true;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels { uppercase: false; }
-
-custom: "----------------------------";
+@info { os: true; kernel: true; uptime: true; shell: true; cpu: true; memory: true; disk: true; }

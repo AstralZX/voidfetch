@@ -1,39 +1,6 @@
-/* voidfetch config - desert-sand */
+@separator "─";
+@margin 1;
 
-@theme arctic
-@style compact
-@separator " ⟡ "
-@margin 2
-@opacity low
-@italic true
+@color { user: #d2b48c; host: #a0522d; label: #faebd7; value: #faebd7; separator: #8b4513; }
 
-@title {
-  enabled: true;
-  format: "{user} ∿ {host}";
-}
-
-@info {
-  os: true;
-  host: true;
-  kernel: true;
-  uptime: true;
-  packages: true;
-  shell: false;
-  terminal: false;
-  de: false;
-  wm: false;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
-
-custom: "░▒▓▒░▒▓▒░▒▓▒░▒▓▒░▒▓▒░▒";
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

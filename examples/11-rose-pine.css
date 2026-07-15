@@ -1,55 +1,7 @@
 @theme rosepine;
-@style fancy;
-@palette pastel;
-@separator " ꝏ ";
-@margin 3;
-@opacity high;
-@italic true;
-@underline false;
-@glow false;
-@font "Victor Mono";
+@separator "·";
+@margin 2;
 
-@color {
-  user: gold;
-  host: rose;
-  label: muted;
-  value: text;
-  separator: subtle;
-  title: pine;
-  logo: love;
-}
+@color { user: #ebbcba; host: #c4a7e7; label: #e0def4; value: #e0def4; separator: #908caa; }
 
-@logo {
-  enabled: true;
-  distro: auto;
-  color: love;
-}
-
-@title {
-  enabled: true;
-  format: "{user}@{host}";
-}
-
-@info {
-  os: true;
-  host: false;
-  kernel: false;
-  uptime: true;
-  packages: true;
-  shell: true;
-  terminal: false;
-  de: false;
-  wm: true;
-  cpu: false;
-  gpu: false;
-  memory: true;
-  disk: false;
-  locale: false;
-  battery: false;
-  resolution: false;
-}
-
-@labels {
-  capitalize: true;
-  uppercase: false;
-}
+@info { os: true; kernel: true; uptime: true; shell: true; wm: true; cpu: true; memory: true; disk: true; }

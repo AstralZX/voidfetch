@@ -253,6 +253,7 @@ fn resolve_variables(content: &str, variables: &HashMap<String, String>) -> Stri
     result
 }
 
+// theme name -> color scheme
 fn apply_theme(cfg: &mut Config, theme_name: &str) {
     let themes: &[(&[&str], &str, &str, &str, &str, &str, &str)] = &[
         (&["arctic", "arctic-frost"], "#88c0d0", "#81a1c1", "#88c0d0", "#eceff4", "#4c566a", "#88c0d0"),
