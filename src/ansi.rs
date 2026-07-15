@@ -43,7 +43,7 @@ pub fn color(name: &str) -> String {
         "turquoise" => "\x1b[38;5;45m".into(),
         "aqua" => "\x1b[38;5;45m".into(),
 
-        // hex colors
+        
         s if s.starts_with('#') && s.len() == 7 => {
             let r = u8::from_str_radix(&s[1..3], 16).unwrap_or(0);
             let g = u8::from_str_radix(&s[3..5], 16).unwrap_or(0);
@@ -51,7 +51,7 @@ pub fn color(name: &str) -> String {
             format!("\x1b[38;2;{};{};{}m", r, g, b)
         }
 
-        // rgb(r, g, b)
+       
         s if s.starts_with("rgb(") => {
             let inner = s.trim_start_matches("rgb(").trim_end_matches(')');
             let parts: Vec<&str> = inner.split(',').map(|p| p.trim()).collect();
